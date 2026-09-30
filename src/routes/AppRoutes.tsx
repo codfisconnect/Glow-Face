@@ -35,6 +35,8 @@ import { AdminProducts } from "../pages/Admin/AdminProducts";
 import { AdminCategories } from "../pages/Admin/AdminCategories";
 import { AdminInventory } from "../pages/Admin/AdminInventory";
 import { AdminCustomers } from "../pages/Admin/AdminCustomers";
+import { AdminCoupons } from "../pages/Admin/AdminCoupons";
+import { AdminNotifications } from "../pages/Admin/AdminNotifications";
 import { AdminActivity } from "../pages/Admin/AdminActivity";
 import { AdminSettings } from "../pages/Admin/AdminSettings";
 
@@ -156,6 +158,8 @@ export const AppRoutes: React.FC = () => {
           <Route path="categories" element={<AdminCategories />} />
           <Route path="inventory" element={<AdminInventory />} />
           <Route path="customers" element={<AdminCustomers />} />
+          <Route path="coupons" element={<AdminCoupons />} />
+          <Route path="notifications" element={<AdminNotifications />} />
           <Route path="activity" element={<AdminActivity />} />
           <Route path="settings" element={<AdminSettings />} />
         </Route>

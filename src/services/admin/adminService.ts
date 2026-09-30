@@ -47,5 +47,37 @@ export const adminService = {
       method: "POST",
       body: JSON.stringify({ key, value })
     });
+  },
+
+  async getCoupons(): Promise<any[]> {
+    const res = await apiRequest<{ ok: boolean; coupons: any[] }>("/admin/coupons");
+    return res.coupons || [];
+  },
+
+  async createCoupon(data: any): Promise<any> {
+    const res = await apiRequest<{ ok: boolean; coupon: any }>("/admin/coupons", {
+      method: "POST",
+      body: JSON.stringify(data)
+    });
+    return res.coupon;
+  },
+
+  async updateCoupon(id: string, data: any): Promise<any> {
+    const res = await apiRequest<{ ok: boolean; coupon: any }>(`/admin/coupons/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(data)
+    });
+    return res.coupon;
+  },
+
+  async getNotificationLogs(orderId?: string): Promise<any[]> {
+    const q = orderId ? `?orderId=${encodeURIComponent(orderId)}` : "";
+    const res = await apiRequest<{ ok: boolean; logs: any[] }>(`/admin/logs/notifications${q}`);
+    return res.logs || [];
+  },
+
+  async getEmailDiagnostics(): Promise<{ configured: boolean; verified: boolean; host?: string; error?: string }> {
+    const res = await apiRequest<{ ok: boolean; diagnostics: any }>("/admin/diagnostics/email");
+    return res.diagnostics;
   }
 };

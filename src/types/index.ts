@@ -199,3 +199,38 @@ export interface AdminNotification {
   link?: string;
   createdAt: string;
 }
+
+export type DiscountType = "PERCENTAGE" | "FIXED";
+
+export interface Coupon {
+  id: string;
+  code: string;
+  description?: string | null;
+  discountType: DiscountType;
+  discountValue: number;
+  minOrderAmount: number;
+  maxDiscount?: number | null;
+  startDate?: string | null;
+  endDate?: string | null;
+  usageLimit?: number | null;
+  usedCount: number;
+  perCustomerLimit: number;
+  active: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface NotificationLogRecord {
+  id: string;
+  orderId?: string | null;
+  idempotencyKey?: string | null;
+  recipient: string;
+  channel: "EMAIL" | "WHATSAPP" | "ADMIN";
+  eventType: string;
+  status: "PENDING" | "SENT" | "FAILED" | "SIMULATED";
+  attempts: number;
+  error?: string | null;
+  metadata?: string | null;
+  createdAt: string;
+  updatedAt: string;
+}

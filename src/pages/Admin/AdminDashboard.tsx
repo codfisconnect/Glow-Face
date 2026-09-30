@@ -9,7 +9,11 @@ import {
   Package,
   Calendar,
   CreditCard,
-  Truck
+  Truck,
+  Clock,
+  Box,
+  AlertCircle,
+  XCircle
 } from "lucide-react";
 import { adminService } from "../../services";
 import { DashboardMetrics } from "../../types";
@@ -125,39 +129,71 @@ export const AdminDashboard: React.FC = () => {
 
           {/* Operational Workflow Status Blocks */}
           <div className="gf-ad-pipeline">
-            <h3 className="gf-ad-section-title">Order Fulfillment Pipeline</h3>
+            <h3 className="gf-ad-section-title">Order Fulfillment Pipeline & Operational Radar</h3>
             <div className="gf-pipeline-grid">
-              <div className="gf-pipeline-box">
-                <CreditCard size={18} color="var(--gold-dark)" />
+              <Link to="/admin/orders" className="gf-pipeline-box">
+                <Clock size={18} color="#d97706" />
+                <div>
+                  <strong>{metrics.orders.statusCounts.PENDING_PAYMENT || 0}</strong>
+                  <span>Pending Payment</span>
+                </div>
+              </Link>
+
+              <Link to="/admin/orders" className="gf-pipeline-box">
+                <CreditCard size={18} color="#059669" />
                 <div>
                   <strong>{metrics.orders.statusCounts.PAID || 0}</strong>
                   <span>Paid / Needs Packing</span>
                 </div>
-              </div>
+              </Link>
 
-              <div className="gf-pipeline-box">
-                <Package size={18} color="#1971C2" />
+              <Link to="/admin/orders" className="gf-pipeline-box">
+                <Package size={18} color="#1d4ed8" />
                 <div>
                   <strong>{metrics.orders.statusCounts.PROCESSING || 0}</strong>
                   <span>In Processing</span>
                 </div>
-              </div>
+              </Link>
 
-              <div className="gf-pipeline-box">
-                <Truck size={18} color="#2B8A3E" />
+              <Link to="/admin/orders" className="gf-pipeline-box">
+                <Box size={18} color="#7c3aed" />
+                <div>
+                  <strong>{metrics.orders.statusCounts.PACKED || 0}</strong>
+                  <span>Packed & Ready</span>
+                </div>
+              </Link>
+
+              <Link to="/admin/orders" className="gf-pipeline-box">
+                <Truck size={18} color="#0284c7" />
                 <div>
                   <strong>{metrics.orders.statusCounts.SHIPPED || 0}</strong>
-                  <span>Dispatched / In Transit</span>
+                  <span>Dispatched / Transit</span>
                 </div>
-              </div>
+              </Link>
 
-              <div className="gf-pipeline-box">
-                <ShoppingBag size={18} color="#2B8A3E" />
+              <Link to="/admin/orders" className="gf-pipeline-box">
+                <ShoppingBag size={18} color="#15803d" />
                 <div>
                   <strong>{metrics.orders.statusCounts.DELIVERED || 0}</strong>
                   <span>Delivered</span>
                 </div>
-              </div>
+              </Link>
+
+              <Link to="/admin/orders" className="gf-pipeline-box">
+                <XCircle size={18} color="#dc2626" />
+                <div>
+                  <strong>{metrics.orders.statusCounts.CANCELLED || 0}</strong>
+                  <span>Cancelled</span>
+                </div>
+              </Link>
+
+              <Link to="/admin/orders" className="gf-pipeline-box">
+                <AlertCircle size={18} color="#e11d48" />
+                <div>
+                  <strong>{metrics.orders.statusCounts.PAYMENT_FAILED || 0}</strong>
+                  <span>Failed Payments</span>
+                </div>
+              </Link>
             </div>
           </div>
 

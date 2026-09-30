@@ -1,0 +1,96 @@
+.gf-admin-coupons-page {
+  padding: 24px;
+}
+
+.gf-admin-coup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.gf-admin-coup-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 4px 0;
+}
+
+.gf-admin-coup-header p {
+  color: #64748b;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.gf-admin-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #0f172a;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.gf-admin-add-btn:hover {
+  background: #1e293b;
+}
+
+.gf-admin-coup-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.gf-admin-coup-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.gf-admin-coup-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.gf-admin-coup-table th {
+  background: #f8fafc;
+  padding: 12px 16px;
+  font-weight: 600;
+  color: #475569;
+  border-bottom: 1px solid #e2e8f0;
+  white-space: nowrap;
+}
+
+.gf-admin-coup-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #1e293b;
+  vertical-align: middle;
+}
+
+.gf-coup-code-badge {
+  font-family: monospace;
+  font-weight: 700;
+  font-size: 0.9rem;
+  background: #f1f5f9;
+  color: #0f172a;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px dashed #cbd5e1;
+}
+
+.gf-coup-discount-val {
+  font-weight: 700;
+  color: #059669;
+}

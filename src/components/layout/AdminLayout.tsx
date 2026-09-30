@@ -7,6 +7,8 @@ import {
   FolderTree,
   Layers,
   Users,
+  Ticket,
+  MailCheck,
   Clock,
   Settings,
   Bell,
@@ -60,6 +62,8 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
     { label: "Dynamic Categories", icon: FolderTree, path: "/admin/categories" },
     { label: "Inventory Radar", icon: Layers, path: "/admin/inventory" },
     { label: "Customer Directory", icon: Users, path: "/admin/customers" },
+    { label: "Coupons & Discounts", icon: Ticket, path: "/admin/coupons" },
+    { label: "Dispatch & Notifications", icon: MailCheck, path: "/admin/notifications" },
     { label: "Activity & Audit Log", icon: Clock, path: "/admin/activity" },
     { label: "Store Settings", icon: Settings, path: "/admin/settings" },
   ];
