@@ -1,0 +1,169 @@
+.gf-social-section {
+  padding: 80px 0 60px;
+  background: var(--cream);
+  border-top: 1px solid var(--border);
+}
+
+.gf-social-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.gf-social-header {
+  text-align: center;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gf-social-sub {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.gf-social-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  color: var(--green-dark);
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+}
+
+.gf-social-handle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFFDF9;
+  border: 1px solid var(--border);
+  color: var(--green-dark);
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.gf-social-handle-btn:hover {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+  transform: translateY(-2px);
+}
+
+.gf-social-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.gf-social-card {
+  display: block;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(18, 60, 42, 0.06);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gf-social-card:hover {
+  transform: translateY(-4px);
+}
+
+.gf-social-thumb-wrap {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: var(--ivory);
+  overflow: hidden;
+}
+
+.gf-social-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gf-social-card:hover .gf-social-img {
+  transform: scale(1.08);
+}
+
+.gf-reel-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 2;
+}
+
+.gf-social-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(18, 60, 42, 0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+}
+
+.gf-social-card:hover .gf-social-overlay {
+  opacity: 1;
+}
+
+.gf-social-caption {
+  color: #fff;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  text-align: center;
+  margin-top: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.gf-social-skeleton {
+  aspect-ratio: 1 / 1;
+  background: var(--border-light);
+  border-radius: var(--radius-md);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+@media (max-width: 1024px) {
+  .gf-social-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .gf-social-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}

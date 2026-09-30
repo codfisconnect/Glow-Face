@@ -1,0 +1,247 @@
+.gf-detail-page {
+  padding-bottom: 90px;
+  width: 100%;
+}
+
+.gf-detail-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  padding: 24px 24px 32px;
+  flex-wrap: wrap;
+}
+
+.gf-detail-breadcrumb a {
+  color: var(--text-medium);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.gf-detail-breadcrumb a:hover {
+  color: var(--green);
+}
+
+.gf-detail-breadcrumb span[aria-current="page"] {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.gf-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: flex-start;
+  margin-bottom: 60px;
+}
+
+.gf-detail-gallery-col {
+  width: 100%;
+  position: sticky;
+  top: 96px;
+}
+
+.gf-detail-info-col {
+  width: 100%;
+}
+
+/* ── TABS SECTION ── */
+.gf-detail-tabs-section {
+  margin-top: 48px;
+  border-top: 1px solid var(--border);
+  padding-top: 48px;
+}
+
+.gf-detail-tabs-nav {
+  display: flex;
+  gap: 16px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 32px;
+  overflow-x: auto;
+}
+
+.gf-detail-tab-btn {
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-light);
+  padding: 12px 16px;
+  cursor: pointer;
+  position: relative;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.gf-detail-tab-btn:hover {
+  color: var(--green);
+}
+
+.gf-detail-tab-btn.active {
+  color: var(--green-dark);
+}
+
+.gf-detail-tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gold);
+}
+
+.gf-detail-tab-pane {
+  min-height: 180px;
+}
+
+.gf-tab-content {
+  animation: fadeIn 0.25s ease forwards;
+}
+
+.gf-tab-lead {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-medium);
+  margin-bottom: 24px;
+  max-width: 800px;
+}
+
+.gf-benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.gf-benefits-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  line-height: 1.5;
+  background: var(--cream);
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+}
+
+.gf-key-ingred-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.gf-ingred-card {
+  background: var(--cream);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gf-ingred-card h4 {
+  font-size: 1rem;
+  color: var(--green-dark);
+  margin: 0;
+}
+
+.gf-ingred-card p {
+  font-size: 0.86rem;
+  color: var(--text-light);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.gf-inci-block {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+}
+
+.gf-inci-block h4 {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+.gf-inci-block p {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  line-height: 1.6;
+  margin: 0;
+  font-family: monospace;
+}
+
+.gf-tab-content--usage h4 {
+  font-size: 1.1rem;
+  color: var(--green-dark);
+  margin-bottom: 8px;
+}
+
+.gf-tab-content--usage p {
+  font-size: 0.98rem;
+  color: var(--text-medium);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.gf-who-for-box {
+  background: var(--cream);
+  border-left: 3px solid var(--gold);
+  padding: 16px 20px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.gf-who-for-box strong {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--green-dark);
+  margin-bottom: 4px;
+}
+
+.gf-who-for-box p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* ── RESPONSIVENESS ── */
+@media (max-width: 900px) {
+  .gf-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .gf-detail-gallery-col {
+    position: static;
+  }
+  .gf-benefits-list {
+    grid-template-columns: 1fr;
+  }
+  .gf-key-ingred-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .gf-detail-breadcrumb {
+    padding: 16px 16px 20px;
+    font-size: 0.78rem;
+  }
+  .gf-detail-tabs-section {
+    margin-top: 32px;
+    padding-top: 32px;
+  }
+  .gf-detail-tab-btn {
+    font-size: 0.92rem;
+    padding: 10px 12px;
+  }
+}

@@ -1,0 +1,261 @@
+.gf-ad-products-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.gf-ad-page-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.gf-ad-primary-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #1F4D3A;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.gf-ad-primary-btn:hover {
+  background: #123C2A;
+}
+
+.gf-ad-prod-table-head {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  padding: 14px 20px;
+  background: #F8FAF9;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #6B8C78;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #E7F0EA;
+}
+
+.gf-ad-prod-table-row {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  padding: 16px 20px;
+  align-items: center;
+  border-bottom: 1px solid #F0F4F1;
+  font-size: 0.86rem;
+}
+
+.gf-ad-prod-table-row:hover {
+  background: #FDF8F3;
+}
+
+.gf-ad-prod-cell {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.gf-ad-prod-cell img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #F8FAF9;
+  border: 1px solid #E7F0EA;
+}
+
+.gf-ad-prod-cell strong {
+  display: block;
+  font-size: 0.88rem;
+  color: #123C2A;
+}
+
+.gf-mini-bestseller {
+  background: #C9A84C;
+  color: #0D2F22;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.gf-category-pill-tag {
+  background: #E7F0EA;
+  color: #1F4D3A;
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 4px;
+  text-transform: capitalize;
+}
+
+.gf-sku-tag {
+  font-size: 0.8rem;
+  color: #6B8C78;
+  font-family: monospace;
+}
+
+.gf-ad-price-strong {
+  display: block;
+  font-size: 0.95rem;
+  color: #123C2A;
+}
+
+.gf-ad-price-strike {
+  font-size: 0.75rem;
+  color: #adb5bd;
+  text-decoration: line-through;
+}
+
+.gf-stock-badge-tag {
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.gf-stock-badge-tag.in {
+  background: #EBFBEE;
+  color: #2B8A3E;
+}
+
+.gf-stock-badge-tag.low {
+  background: #FFF4E6;
+  color: #D9480F;
+}
+
+.gf-stock-badge-tag.out {
+  background: #F1F3F5;
+  color: #868E96;
+}
+
+.gf-status-active-pill {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.gf-status-active-pill.active {
+  background: #EBFBEE;
+  color: #2B8A3E;
+}
+
+.gf-status-active-pill.inactive {
+  background: #FFE3E3;
+  color: #C92A2A;
+}
+
+.gf-ad-icon-btn {
+  background: #F8FAF9;
+  border: 1px solid #D8E8DC;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #123C2A;
+  transition: all 0.2s;
+}
+
+.gf-ad-icon-btn.edit:hover {
+  background: #E7F0EA;
+  color: #1F4D3A;
+}
+
+.gf-ad-icon-btn.delete:hover {
+  background: #FFE3E3;
+  color: #C92A2A;
+  border-color: #FFA8A8;
+}
+
+/* Modal */
+.gf-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.gf-modal-card {
+  width: 100%;
+  max-width: 650px;
+  background: #FFFDF9;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.gf-modal-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid #E7F0EA;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gf-modal-header h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: #123C2A;
+}
+
+.gf-modal-header button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6B8C78;
+}
+
+.gf-modal-form {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gf-modal-form textarea {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #D8E8DC;
+  font-size: 0.85rem;
+  outline: none;
+  resize: vertical;
+}
+
+.gf-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid #E7F0EA;
+}
+
+.gf-modal-cancel {
+  background: none;
+  border: 1px solid #D8E8DC;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6B8C78;
+  cursor: pointer;
+}

@@ -1,0 +1,249 @@
+/* ============================================================
+   ADMIN CUSTOMERS DIRECTORY STYLES
+   ============================================================ */
+
+.gf-ad-cust-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.gf-ad-cust-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.gf-ad-cust-card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.gf-ad-cust-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gf-ad-cust-card-icon.blue {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.gf-ad-cust-card-icon.green {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.gf-ad-cust-card-icon.gold {
+  background: #fffbeb;
+  color: #d97706;
+}
+
+.gf-ad-cust-card-label {
+  display: block;
+  font-size: 0.8rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.gf-ad-cust-card-val {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.gf-ad-cust-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.gf-ad-cust-search-wrap {
+  position: relative;
+  flex: 1;
+  max-width: 480px;
+}
+
+.gf-ad-cust-search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+.gf-ad-cust-search-input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  font-size: 0.88rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #0f172a;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.gf-ad-cust-search-input:focus {
+  border-color: #0f172a;
+  box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.08);
+}
+
+.gf-ad-cust-table-card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+}
+
+.gf-ad-cust-table-resp {
+  overflow-x: auto;
+}
+
+.gf-ad-cust-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.gf-ad-cust-table th {
+  background: #f8fafc;
+  padding: 0.85rem 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.gf-ad-cust-table td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 0.88rem;
+  color: #334155;
+  vertical-align: middle;
+}
+
+.gf-ad-cust-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.gf-ad-cust-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.gf-ad-cust-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: #334155;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gf-ad-cust-name {
+  display: block;
+  color: #0f172a;
+  font-size: 0.9rem;
+}
+
+.gf-ad-cust-id {
+  display: block;
+  font-size: 0.72rem;
+  color: #94a3b8;
+  font-family: monospace;
+}
+
+.gf-ad-cust-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.82rem;
+}
+
+.gf-ad-cust-email,
+.gf-ad-cust-phone {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #475569;
+}
+
+.gf-ad-cust-badge-orders {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  background: #f1f5f9;
+  color: #1e293b;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.gf-ad-cust-spent {
+  color: #059669;
+  font-weight: 700;
+}
+
+.gf-ad-cust-date {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.gf-ad-cust-status {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.gf-ad-cust-status.active {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.gf-ad-cust-status.lead {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.gf-ad-cust-empty,
+.gf-ad-cust-loading {
+  padding: 4rem 2rem;
+  text-align: center;
+  color: #64748b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.gf-ad-cust-empty h3 {
+  font-size: 1.1rem;
+  color: #0f172a;
+}

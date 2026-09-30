@@ -1,0 +1,258 @@
+.gf-ad-orders-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.gf-ad-filters-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.gf-ad-search-box {
+  position: relative;
+  flex: 1;
+  max-width: 440px;
+  min-width: 280px;
+  display: flex;
+}
+
+.gf-ad-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9BB0A3;
+}
+
+.gf-ad-search-box input {
+  width: 100%;
+  padding: 10px 90px 10px 36px;
+  border-radius: 8px;
+  border: 1px solid #D8E8DC;
+  background: #FFFDF9;
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.gf-ad-search-box button {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  bottom: 4px;
+  background: #1F4D3A;
+  color: #fff;
+  border: none;
+  padding: 0 14px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.gf-ad-filter-selects {
+  display: flex;
+  gap: 12px;
+}
+
+.gf-ad-filter-selects select {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #D8E8DC;
+  background: #FFFDF9;
+  font-size: 0.84rem;
+  color: #123C2A;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Table Card */
+.gf-ad-table-card {
+  background: #FFFDF9;
+  border: 1px solid #D8E8DC;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+}
+
+.gf-ad-table-head {
+  display: grid;
+  grid-template-columns: 1.4fr 1.2fr 2fr 1fr 1.2fr 1fr 1fr;
+  padding: 14px 20px;
+  background: #F8FAF9;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #6B8C78;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #E7F0EA;
+}
+
+.gf-ad-table-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.gf-ad-table-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1.2fr 2fr 1fr 1.2fr 1fr 1fr;
+  padding: 16px 20px;
+  align-items: center;
+  border-bottom: 1px solid #F0F4F1;
+  font-size: 0.86rem;
+}
+
+.gf-ad-table-row:last-child {
+  border-bottom: none;
+}
+
+.gf-ad-table-row:hover {
+  background: #FDF8F3;
+}
+
+.gf-ad-cell-id strong {
+  display: block;
+  font-size: 0.88rem;
+  color: #123C2A;
+}
+
+.gf-ad-cell-id small {
+  font-size: 0.72rem;
+  color: #1F4D3A;
+}
+
+.gf-ad-cell-date span {
+  display: block;
+  font-size: 0.82rem;
+  color: #24352C;
+}
+
+.gf-ad-cell-date small {
+  font-size: 0.72rem;
+  color: #9BB0A3;
+}
+
+.gf-ad-cell-cust strong {
+  display: block;
+  font-size: 0.86rem;
+  color: #123C2A;
+}
+
+.gf-ad-cell-cust small {
+  font-size: 0.74rem;
+  color: #6B8C78;
+}
+
+.gf-ad-status-pill {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+.gf-ad-status-pill.paid,
+.gf-ad-status-pill.delivered {
+  background: #EBFBEE;
+  color: #2B8A3E;
+}
+
+.gf-ad-status-pill.processing,
+.gf-ad-status-pill.packed,
+.gf-ad-status-pill.shipped {
+  background: #E7F5FF;
+  color: #1971C2;
+}
+
+.gf-ad-status-pill.pending_payment,
+.gf-ad-status-pill.pending {
+  background: #FFF9DB;
+  color: #F08C00;
+}
+
+.gf-ad-status-pill.cancelled,
+.gf-ad-status-pill.failed,
+.gf-ad-status-pill.payment_failed {
+  background: #FFE3E3;
+  color: #C92A2A;
+}
+
+.gf-ad-order-total-price {
+  font-size: 0.95rem;
+  color: #123C2A;
+}
+
+.gf-ad-row-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #E7F0EA;
+  color: #123C2A;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.gf-ad-row-btn:hover {
+  background: #1F4D3A;
+  color: #fff;
+}
+
+.gf-ad-table-loading,
+.gf-ad-table-empty {
+  padding: 40px;
+  text-align: center;
+  color: #9BB0A3;
+  font-size: 0.9rem;
+}
+
+/* Pagination */
+.gf-ad-pagination {
+  padding: 16px 20px;
+  border-top: 1px solid #E7F0EA;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  color: #6B8C78;
+}
+
+.gf-ad-pagination-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.gf-ad-pagination-btns button {
+  background: #FFFDF9;
+  border: 1px solid #D8E8DC;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #123C2A;
+  cursor: pointer;
+}
+
+.gf-ad-pagination-btns button:hover:not(:disabled) {
+  background: #E7F0EA;
+}
+
+.gf-ad-pagination-btns button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1024px) {
+  .gf-ad-table-head,
+  .gf-ad-table-row {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+}

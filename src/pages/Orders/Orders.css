@@ -1,0 +1,256 @@
+.gf-orders-page {
+  padding: 50px 0 90px;
+  background: var(--ivory);
+  min-height: 80vh;
+}
+
+.gf-orders-header {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 36px;
+}
+
+.gf-orders-sub {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.gf-orders-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  color: var(--green-dark);
+  margin-bottom: 12px;
+}
+
+.gf-orders-desc {
+  font-size: 0.95rem;
+  color: var(--text-medium);
+  line-height: 1.6;
+}
+
+.gf-orders-lookup-bar {
+  max-width: 520px;
+  margin: 0 auto 40px;
+  display: flex;
+  gap: 10px;
+}
+
+.gf-orders-lookup-bar input {
+  flex: 1;
+  padding: 12px 18px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  background: #FFFDF9;
+  font-size: 0.88rem;
+  outline: none;
+}
+
+.gf-orders-lookup-bar input:focus {
+  border-color: var(--green);
+}
+
+.gf-orders-lookup-bar button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--green);
+  color: var(--ivory);
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.gf-orders-lookup-bar button:hover {
+  background: var(--green-dark);
+}
+
+.gf-orders-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.gf-order-card {
+  background: #FFFDF9;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  box-shadow: 0 4px 15px rgba(18, 60, 42, 0.04);
+}
+
+.gf-order-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.gf-order-info-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.gf-order-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--green-dark);
+}
+
+.gf-order-date {
+  font-size: 0.8rem;
+  color: var(--text-light);
+}
+
+.gf-order-info-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.gf-order-amount {
+  font-size: 1.15rem;
+  color: var(--green-dark);
+}
+
+.gf-status-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.gf-status-badge.delivered {
+  background: #EBFBEE;
+  color: #2B8A3E;
+}
+
+.gf-status-badge.shipped {
+  background: #E7F5FF;
+  color: #1971C2;
+}
+
+.gf-status-badge.processing {
+  background: #FFF4E6;
+  color: #D9480F;
+}
+
+.gf-status-badge.pending {
+  background: #FFF9DB;
+  color: #F08C00;
+}
+
+.gf-status-badge.failed {
+  background: #FFE3E3;
+  color: #C92A2A;
+}
+
+.gf-order-items-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.gf-order-item-thumb-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.gf-order-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  object-fit: cover;
+  background: var(--cream);
+}
+
+.gf-order-item-title-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.gf-order-item-title-meta strong {
+  font-size: 0.85rem;
+  color: var(--text-dark);
+}
+
+.gf-order-item-title-meta span {
+  font-size: 0.76rem;
+  color: var(--text-light);
+}
+
+.gf-order-card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-light);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.gf-order-tracking-pill {
+  font-size: 0.8rem;
+  color: var(--text-medium);
+  background: var(--cream);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+}
+
+.gf-track-detail-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--green);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: auto;
+}
+
+.gf-track-detail-btn:hover {
+  text-decoration: underline;
+}
+
+.gf-orders-empty {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--cream);
+  border-radius: var(--radius-md);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.gf-orders-empty h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--green-dark);
+  margin: 16px 0 8px;
+}
+
+.gf-orders-empty p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 24px;
+}

@@ -1,0 +1,194 @@
+.gf-ad-detail-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.gf-ad-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #1F4D3A;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.gf-ad-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #D8E8DC;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.gf-ad-detail-tag {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6B8C78;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.gf-ad-detail-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: #123C2A;
+  margin-bottom: 4px;
+}
+
+.gf-ad-detail-time {
+  font-size: 0.82rem;
+  color: #6B8C78;
+}
+
+.gf-ad-detail-badges {
+  display: flex;
+  gap: 10px;
+}
+
+.gf-ad-detail-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.gf-ad-detail-left,
+.gf-ad-detail-right {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.gf-ad-card {
+  background: #FFFDF9;
+  border: 1px solid #D8E8DC;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.gf-ad-card-title {
+  font-size: 1.1rem;
+  color: #123C2A;
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #F0F4F1;
+}
+
+.gf-ad-status-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gf-ad-update-save-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #1F4D3A;
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.gf-ad-update-save-btn:hover:not(:disabled) {
+  background: #123C2A;
+}
+
+.gf-ad-items-table {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.gf-ad-item-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid #F0F4F1;
+}
+
+.gf-ad-item-row img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #F8FAF9;
+}
+
+.gf-ad-item-details {
+  flex: 1;
+}
+
+.gf-ad-item-details strong {
+  display: block;
+  font-size: 0.88rem;
+  color: #123C2A;
+}
+
+.gf-ad-item-details span {
+  font-size: 0.74rem;
+  color: #6B8C78;
+}
+
+.gf-ad-item-math {
+  display: flex;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #24352C;
+}
+
+.gf-ad-totals-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px solid #D8E8DC;
+  font-size: 0.88rem;
+  color: #3D5C4A;
+}
+
+.gf-ad-total-line {
+  display: flex;
+  justify-content: space-between;
+}
+
+.gf-ad-total-grand {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #123C2A;
+  padding-top: 8px;
+  border-top: 1px solid #D8E8DC;
+}
+
+.gf-ad-cust-info-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.86rem;
+  color: #3D5C4A;
+}
+
+.gf-ad-cust-info-lines strong {
+  color: #123C2A;
+  margin-right: 6px;
+}
+
+@media (max-width: 900px) {
+  .gf-ad-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}

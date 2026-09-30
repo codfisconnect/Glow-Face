@@ -1,0 +1,27 @@
+.gf-related-products {
+  padding: 60px 0 20px;
+  border-top: 1px solid var(--border-light);
+  margin-top: 60px;
+}
+
+.gf-related-products__header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.gf-related-products__sub {
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.gf-related-products__title {
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0;
+}

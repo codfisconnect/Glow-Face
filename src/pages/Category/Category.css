@@ -1,0 +1,143 @@
+.gf-category-page {
+  padding-bottom: 80px;
+}
+
+.gf-category-hero {
+  background: radial-gradient(circle at center, var(--cream) 0%, var(--ivory) 100%);
+  border-bottom: 1px solid var(--border-light);
+  padding: 40px 0 50px;
+}
+
+.gf-cat-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text-light);
+  margin-bottom: 24px;
+}
+
+.gf-cat-breadcrumbs a {
+  color: var(--text-medium);
+  text-decoration: none;
+}
+
+.gf-cat-breadcrumbs a:hover {
+  color: var(--green);
+}
+
+.gf-cat-header-content {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.gf-cat-header-icon {
+  font-size: 2.4rem;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.gf-cat-header-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--green-dark);
+  text-transform: capitalize;
+  margin-bottom: 10px;
+}
+
+.gf-cat-header-desc {
+  font-size: 0.95rem;
+  color: var(--text-medium);
+  line-height: 1.6;
+}
+
+.gf-cat-body {
+  margin-top: 36px;
+}
+
+.gf-cat-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.gf-cat-product-count {
+  font-size: 0.88rem;
+  color: var(--text-light);
+}
+
+.gf-cat-filters {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.gf-cat-stock-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-medium);
+  cursor: pointer;
+}
+
+.gf-cat-sort-select {
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  background: #fff;
+  font-size: 0.84rem;
+  color: var(--text-dark);
+  outline: none;
+  cursor: pointer;
+}
+
+.gf-cat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.gf-cat-empty {
+  text-align: center;
+  padding: 80px 20px;
+  background: var(--cream);
+  border-radius: var(--radius-md);
+}
+
+.gf-cat-empty h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--green-dark);
+  margin-bottom: 8px;
+}
+
+.gf-cat-empty p {
+  color: var(--text-light);
+  margin-bottom: 24px;
+}
+
+@media (max-width: 1024px) {
+  .gf-cat-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .gf-cat-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gf-cat-grid {
+    grid-template-columns: 1fr;
+  }
+}

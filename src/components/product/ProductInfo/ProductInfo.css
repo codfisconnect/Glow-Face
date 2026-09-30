@@ -1,0 +1,351 @@
+.gf-prod-info {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.gf-prod-info__badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.gf-prod-info__cat-tag {
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: var(--green-soft);
+  color: var(--green-dark);
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.gf-prod-info__cat-tag:hover {
+  background: var(--green-light);
+}
+
+.gf-prod-info__bestseller-pill {
+  font-size: 0.74rem;
+  font-weight: 700;
+  background: var(--gold);
+  color: var(--green-deeper);
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.gf-prod-info__concern-pill {
+  font-size: 0.74rem;
+  font-weight: 500;
+  background: #f1f3f5;
+  color: #495057;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+}
+
+.gf-prod-info__title {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.25;
+  margin: 0;
+}
+
+.gf-prod-info__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.gf-prod-info__rating-num {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+}
+
+.gf-prod-info__reviews-count {
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.gf-prod-info__sku {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.gf-prod-info__pricing {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 14px 0;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  flex-wrap: wrap;
+}
+
+.gf-prod-info__price {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--green-dark);
+}
+
+.gf-prod-info__mrp {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.gf-prod-info__discount-save {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #c92a2a;
+  background: #ffe3e3;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+.gf-prod-info__tax-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  width: 100%;
+  margin-top: -6px;
+}
+
+.gf-prod-info__desc {
+  font-size: 0.96rem;
+  line-height: 1.6;
+  color: var(--text-medium);
+  margin: 0;
+}
+
+.gf-prod-info__stock {
+  margin: 4px 0;
+}
+
+.gf-stock-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+}
+
+.gf-stock-in {
+  background: #ebfbee;
+  color: #2b8a3e;
+}
+
+.gf-stock-low {
+  background: #fff9db;
+  color: #e67700;
+}
+
+.gf-stock-out {
+  background: #f1f3f5;
+  color: #868e96;
+}
+
+.gf-prod-info__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.gf-prod-info__qty-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.gf-prod-info__qty-wrapper label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.gf-qty-control {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--white);
+  padding: 4px 8px;
+  box-shadow: var(--shadow-sm);
+}
+
+.gf-qty-control button {
+  background: transparent;
+  border: none;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  color: var(--text-dark);
+  transition: var(--transition);
+}
+
+.gf-qty-control button:hover:not(:disabled) {
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.gf-qty-control button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.gf-qty-control span {
+  min-width: 32px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.gf-prod-info__btn-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.gf-btn-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 14px 28px;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  min-height: 48px;
+}
+
+.gf-btn-cta--cart {
+  background: var(--green);
+  color: var(--ivory);
+  flex: 1;
+  min-width: 140px;
+}
+
+.gf-btn-cta--cart:hover:not(:disabled) {
+  background: var(--green-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.gf-btn-cta--buynow {
+  background: var(--gold);
+  color: var(--green-deeper);
+  font-weight: 700;
+  flex: 1;
+  min-width: 130px;
+}
+
+.gf-btn-cta--buynow:hover:not(:disabled) {
+  background: var(--gold-dark);
+  color: var(--ivory);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(201, 168, 76, 0.35);
+}
+
+.gf-btn-cta:disabled {
+  background: #ced4da;
+  color: #868e96;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.gf-btn-cta--wish {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.gf-btn-cta--wish:hover {
+  background: var(--cream);
+  border-color: var(--green-sage);
+  transform: scale(1.06);
+}
+
+.gf-btn-cta--wish.active {
+  border-color: #ffe3e3;
+  background: #fff5f5;
+}
+
+.gf-prod-info__perks {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  margin-top: 12px;
+}
+
+.gf-perk-row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.gf-perk-row strong {
+  display: block;
+  font-size: 0.88rem;
+  color: var(--text-dark);
+  margin-bottom: 2px;
+}
+
+.gf-perk-row p {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin: 0;
+  line-height: 1.4;
+}
+
+@media (max-width: 600px) {
+  .gf-prod-info__btn-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .gf-btn-cta--cart,
+  .gf-btn-cta--buynow {
+    width: 100%;
+  }
+  .gf-btn-cta--wish {
+    width: 100%;
+    border-radius: var(--radius-full);
+    height: 44px;
+    gap: 8px;
+  }
+  .gf-btn-cta--wish::after {
+    content: "Save to Wishlist";
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+}

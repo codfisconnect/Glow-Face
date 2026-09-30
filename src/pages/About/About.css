@@ -1,0 +1,224 @@
+.gf-about-page {
+  padding-bottom: 90px;
+  width: 100%;
+}
+
+.gf-about-hero {
+  background: radial-gradient(circle at center, var(--cream) 0%, var(--ivory) 100%);
+  border-bottom: 1px solid var(--border-light);
+  padding: 60px 0 70px;
+  text-align: center;
+}
+
+.gf-about-hero__container {
+  max-width: 720px;
+}
+
+.gf-about-eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+  color: var(--gold-dark);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.gf-about-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 700;
+  color: var(--green-deeper);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.gf-about-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-medium);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Story Grid */
+.gf-about-story {
+  padding: 80px 24px;
+}
+
+.gf-about-story__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  align-items: center;
+  gap: 56px;
+}
+
+.gf-about-story__image-wrap {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  aspect-ratio: 1 / 1;
+}
+
+.gf-about-story__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gf-about-section-tag {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--gold-dark);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.gf-about-story__content h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+  color: var(--green-deeper);
+  margin-bottom: 20px;
+}
+
+.gf-about-story__content p {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-medium);
+  margin-bottom: 16px;
+}
+
+/* Pillars */
+.gf-about-pillars {
+  background: var(--cream);
+  padding: 80px 0;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.gf-about-pillars__header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.gf-about-pillars__header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  color: var(--green-deeper);
+}
+
+.gf-about-pillars__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.gf-pillar-card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 32px 24px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: var(--transition);
+}
+
+.gf-pillar-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.gf-pillar-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--green-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.gf-pillar-card h3 {
+  font-size: 1.2rem;
+  color: var(--green-dark);
+  margin-bottom: 10px;
+}
+
+.gf-pillar-card p {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--text-light);
+  margin: 0;
+}
+
+/* Banner card */
+.gf-about-visual-banner {
+  padding: 80px 24px 0;
+}
+
+.gf-about-banner-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--green-deeper);
+  color: var(--ivory);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  align-items: center;
+}
+
+.gf-about-banner-image {
+  height: 100%;
+  min-height: 340px;
+}
+
+.gf-about-banner-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gf-about-banner-text {
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.gf-about-banner-text h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  color: var(--gold-pale);
+  margin-bottom: 14px;
+}
+
+.gf-about-banner-text p {
+  font-size: 1rem;
+  color: var(--green-sage);
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+/* Responsiveness */
+@media (max-width: 900px) {
+  .gf-about-story__grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .gf-about-pillars__grid {
+    grid-template-columns: 1fr;
+  }
+  .gf-about-banner-card {
+    grid-template-columns: 1fr;
+  }
+  .gf-about-banner-image {
+    min-height: 240px;
+  }
+  .gf-about-banner-text {
+    padding: 32px 24px;
+  }
+}
