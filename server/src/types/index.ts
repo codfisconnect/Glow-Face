@@ -28,6 +28,8 @@ export interface User {
   name?: string | null;
   phone?: string | null;
   passwordHash?: string | null;
+  resetToken?: string | null;
+  resetTokenExpiry?: Date | null;
   role: Role;
   createdAt: Date;
   updatedAt: Date;
@@ -66,6 +68,7 @@ export interface ProductImage {
   id?: string;
   productId?: string;
   url: string;
+  publicId?: string | null;
   altText?: string | null;
   sortOrder: number;
 }
@@ -138,9 +141,11 @@ export interface Order {
   carrier?: string | null;
   notes?: string | null;
   paidAt?: Date | null;
+  packedAt?: Date | null;
   shippedAt?: Date | null;
   deliveredAt?: Date | null;
   cancelledAt?: Date | null;
+  refundedAt?: Date | null;
   createdAt: Date;
   updatedAt: Date;
   items: OrderItem[];

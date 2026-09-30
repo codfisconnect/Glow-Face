@@ -13,6 +13,8 @@ model User {
   name         String?
   phone        String?
   passwordHash String?
+  resetToken   String?
+  resetTokenExpiry DateTime?
   role         String   @default("CUSTOMER")
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
@@ -105,6 +107,7 @@ model ProductImage {
   productId String
   product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
   url       String
+  publicId  String?
   altText   String?
   sortOrder Int      @default(0)
   createdAt DateTime @default(now())
@@ -175,9 +178,11 @@ model Order {
   carrier           String?
   notes             String?
   paidAt            DateTime?
+  packedAt          DateTime?
   shippedAt         DateTime?
   deliveredAt       DateTime?
   cancelledAt       DateTime?
+  refundedAt        DateTime?
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 
@@ -208,22 +213,24 @@ model OrderItem {
 }
 
 model NotificationLog {
-  id        String   @id @default(cuid())
-  orderId   String?
-  order     Order?   @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  recipient String
-  channel   String
-  eventType String
-  status    String   @default("PENDING")
-  attempts  Int      @default(1)
-  error     String?
-  metadata  String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id             String   @id @default(cuid())
+  orderId        String?
+  order          Order?   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  idempotencyKey String?  @unique
+  recipient      String
+  channel        String
+  eventType      String
+  status         String   @default("PENDING")
+  attempts       Int      @default(1)
+  error          String?
+  metadata       String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   @@index([orderId])
   @@index([channel])
   @@index([status])
+  @@index([idempotencyKey])
 }
 
 model AdminNotification {
