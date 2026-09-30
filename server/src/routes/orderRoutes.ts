@@ -14,5 +14,6 @@ router.get("/track/:id", orderController.getOrder);
 router.get("/admin/list", requireAdmin, orderController.getAdminOrders);
 router.get("/admin/:id", requireAdmin, orderController.getOrder);
 router.patch("/admin/:id/status", requireAdmin, orderController.updateOrderStatus);
+router.patch("/:id/status", requireAdmin, orderController.updateOrderStatus);
 
 export default router;

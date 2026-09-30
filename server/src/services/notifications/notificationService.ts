@@ -17,6 +17,7 @@ export type NotificationEventType =
   | "ORDER_PACKED"
   | "ORDER_SHIPPED"
   | "ORDER_DELIVERED"
+  | "OUT_FOR_DELIVERY"
   | "LOW_STOCK";
 
 export class NotificationService {
@@ -84,6 +85,10 @@ export class NotificationService {
         case "ORDER_SHIPPED":
           emailTemplate = NotificationTemplates.orderShippedEmail(order);
           waMessage = NotificationTemplates.orderShippedWhatsApp(order);
+          break;
+        case "OUT_FOR_DELIVERY":
+          emailTemplate = NotificationTemplates.outForDeliveryEmail(order);
+          waMessage = NotificationTemplates.outForDeliveryWhatsApp(order);
           break;
         case "ORDER_DELIVERED":
           emailTemplate = NotificationTemplates.orderDeliveredEmail(order);
@@ -205,16 +210,7 @@ export class NotificationService {
   }
 
   notifyOutForDelivery(order: Order): void {
-    Promise.resolve().then(async () => {
-      const waText = NotificationTemplates.outForDeliveryWhatsApp(order);
-      await sendWhatsAppMessage({
-        to: order.customerPhone,
-        message: waText,
-        orderId: order.id,
-        eventType: "OUT_FOR_DELIVERY",
-        idempotencyKey: `${order.id}_OUT_FOR_DELIVERY_WHATSAPP`
-      });
-    }).catch(() => {});
+    Promise.resolve().then(() => this.dispatchEvent("OUT_FOR_DELIVERY", order)).catch(() => {});
   }
 
   /**

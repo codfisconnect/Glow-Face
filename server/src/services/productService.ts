@@ -1,5 +1,6 @@
 import { getDatabase } from "../config/database.js";
 import { Product, Category } from "../types/index.js";
+import { cloudinaryService } from "./cloudinaryService.js";
 import { HttpError } from "../middleware/errorHandler.js";
 
 export class ProductService {
@@ -380,6 +381,9 @@ export class ProductService {
     const { type, db } = getDatabase();
 
     if (type === "prisma") {
+      const existing = await db.product.findUnique({ where: { id }, include: { images: true } });
+      const oldImage = existing?.images?.[0]?.url;
+
       const dataToUpdate: any = { ...updates };
       if (dataToUpdate.benefits !== undefined && typeof dataToUpdate.benefits !== "string") {
         dataToUpdate.benefits = JSON.stringify(dataToUpdate.benefits);
@@ -392,18 +396,29 @@ export class ProductService {
         data: dataToUpdate,
         include: { images: true, category: true }
       });
+
+      if (updates.image && oldImage && updates.image !== oldImage && !oldImage.startsWith("/assets/")) {
+        cloudinaryService.deleteProductImage(oldImage).catch(() => {});
+      }
+
       return this.formatProduct(updated);
     }
 
     const p = db.products.get(id);
     if (!p) throw new HttpError(404, "Product not found");
 
+    const oldImage = p.image;
     const updatedProduct = {
       ...p,
       ...updates,
       updatedAt: new Date()
     };
     db.products.set(id, updatedProduct);
+
+    if (updates.image && oldImage && updates.image !== oldImage && !oldImage.startsWith("/assets/")) {
+      cloudinaryService.deleteProductImage(oldImage).catch(() => {});
+    }
+
     return updatedProduct;
   }
 

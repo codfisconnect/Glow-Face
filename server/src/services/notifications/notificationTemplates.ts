@@ -219,6 +219,30 @@ export const NotificationTemplates = {
   },
 
   // 6. OUT_FOR_DELIVERY
+  outForDeliveryEmail(order: Order): { subject: string; html: string; text: string } {
+    const html = `
+    <!DOCTYPE html>
+    <html>
+    <body style="font-family: sans-serif; background-color: #FAFAF7; margin: 0; padding: 24px;">
+      <div style="max-width: 580px; margin: 0 auto; background: #ffffff; border-radius: 12px; padding: 32px 24px; border: 1px solid #EAEAE4;">
+        <h2 style="color: #123C2A; margin-top: 0;">Out For Delivery Today 🚚</h2>
+        <p style="color: #475569; font-size: 15px; line-height: 1.6;">
+          Hello <strong>${order.customerName}</strong>, your package for Order <strong>#${order.orderNumber}</strong> is out for delivery today with our courier partner.
+        </p>
+        <div style="background: #F4F6F0; border-radius: 8px; padding: 18px; margin: 20px 0;">
+          <p style="margin: 0; font-size: 14px; color: #123C2A;"><strong>Carrier:</strong> ${order.carrier || "Surface Express"}</p>
+          <p style="margin: 6px 0 0 0; font-size: 14px; color: #123C2A;"><strong>Tracking:</strong> ${order.trackingNumber || "Assigned"}</p>
+        </div>
+        <p style="color: #64748b; font-size: 14px;">
+          Please ensure someone is reachable at the delivery phone number to receive the order.
+        </p>
+      </div>
+    </body>
+    </html>`;
+    const text = `Order #${order.orderNumber} is Out for Delivery Today. Hello ${order.customerName}, your package is with our courier and will arrive today.`;
+    return { subject: `Out for Delivery: #${order.orderNumber} - Glow Face Skincare`, html, text };
+  },
+
   outForDeliveryWhatsApp(order: Order): string {
     return `📦 *Glow Face Skincare* — Out for Delivery Today!\n\nHello ${order.customerName},\nYour Order *#${order.orderNumber}* is out for delivery with our courier partner. Please keep your phone reachable. ✨`;
   },

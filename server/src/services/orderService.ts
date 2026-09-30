@@ -172,6 +172,9 @@ export class OrderService {
       db.orders.set(orderId, newOrder);
     }
 
+    // Trigger ORDER_PLACED notification (safe & non-blocking)
+    notificationService.notifyOrderPlaced(newOrder);
+
     return {
       orderId,
       orderNumber,
@@ -543,6 +546,27 @@ export class OrderService {
       db.orders.set(orderId, order);
     }
 
+    // Inventory restoration when order is CANCELLED or REFUNDED after payment
+    if (
+      (nextStatus === "CANCELLED" || nextStatus === "REFUNDED") &&
+      previousStatus !== "CANCELLED" &&
+      previousStatus !== "REFUNDED" &&
+      order.paymentStatus === "PAID"
+    ) {
+      for (const item of order.items || []) {
+        if (item.productId) {
+          try {
+            const product = await productService.getProductBySlug(item.productId);
+            const restoredStock = product.stock + (item.quantity || 1);
+            await productService.updateProduct(product.id, { stock: restoredStock });
+            notificationService.resetLowStockAlert(product.id);
+          } catch (err: any) {
+            console.warn("Inventory restoration error on cancellation:", err.message);
+          }
+        }
+      }
+    }
+
     const formatted = this.formatOrder(order);
 
     // Record Immutable Admin Audit Trail
@@ -593,6 +617,8 @@ export class OrderService {
         notificationService.notifyOrderDelivered(formatted);
       } else if (nextStatus === "CANCELLED") {
         notificationService.notifyOrderCancelled(formatted);
+      } else if (nextStatus === "PAYMENT_FAILED") {
+        notificationService.notifyPaymentFailed(formatted);
       }
     }
 

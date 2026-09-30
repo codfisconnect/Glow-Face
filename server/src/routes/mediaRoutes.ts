@@ -26,4 +26,10 @@ router.delete(
   mediaController.deleteImage
 );
 
+router.post(
+  "/delete",
+  requireAdmin,
+  mediaController.deleteImage
+);
+
 export default router;
