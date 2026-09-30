@@ -104,7 +104,7 @@ export const Profile: React.FC = () => {
                       <strong>Order #{ord.orderNumber || ord.id}</strong>
                       <span>{new Date(ord.createdAt).toLocaleDateString()} • ₹{ord.totalAmount}</span>
                     </div>
-                    <Link to={`/order/${ord.id}`} className="gf-order-link-btn">
+                    <Link to={`/orders/${ord.id}`} className="gf-order-link-btn">
                       <span>Track</span>
                       <ArrowRight size={14} />
                     </Link>

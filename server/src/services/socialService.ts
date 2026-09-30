@@ -92,7 +92,7 @@ export class SocialService {
           mediaType: "IMAGE",
           mediaUrl: "/assets/cream-open.jpg",
           permalink: `https://instagram.com/${ENV.INSTAGRAM_HANDLE}`,
-          caption: "Clinically formulated for Indian tropical humidity. Non-comedogenic goodness 🌸"
+          caption: "Formulated for Indian tropical humidity. Lightweight non-greasy skincare 🌸"
         }
       ]
     };

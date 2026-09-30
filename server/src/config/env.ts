@@ -60,7 +60,7 @@ export const ENV: Environment = {
 
   INSTAGRAM_ACCOUNT_ID: process.env.INSTAGRAM_ACCOUNT_ID || "",
   INSTAGRAM_ACCESS_TOKEN: process.env.META_ACCESS_TOKEN || process.env.INSTAGRAM_ACCESS_TOKEN || "",
-  INSTAGRAM_HANDLE: process.env.INSTAGRAM_HANDLE || "glowface_official"
+  INSTAGRAM_HANDLE: process.env.INSTAGRAM_HANDLE || "glowface.kl"
 };
 
 // Fail fast in production if critical secrets are missing
