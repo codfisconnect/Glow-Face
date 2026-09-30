@@ -39,6 +39,57 @@ export const productController = {
     }
   },
 
+  async getAllCategories(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const includeInactive = req.query.includeInactive === "true";
+      const categories = await productService.getAllCategories(includeInactive);
+      res.json({ ok: true, categories });
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  async createCategory(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const category = await productService.createCategory(req.body);
+      res.status(201).json({ ok: true, category });
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  async updateCategory(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const category = await productService.updateCategory(req.params.id as string, req.body);
+      res.json({ ok: true, category });
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  async deleteCategory(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      await productService.deleteCategory(req.params.id as string);
+      res.json({ ok: true, message: "Category deactivated successfully" });
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  async reorderCategories(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const { orderedIds } = req.body;
+      if (!Array.isArray(orderedIds)) {
+        res.status(400).json({ ok: false, error: "orderedIds must be an array of category IDs" });
+        return;
+      }
+      await productService.reorderCategories(orderedIds);
+      res.json({ ok: true, message: "Categories reordered successfully" });
+    } catch (err) {
+      next(err);
+    }
+  },
+
   async createProduct(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const product = await productService.createProduct(req.body);

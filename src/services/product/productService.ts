@@ -7,9 +7,41 @@ export const productService = {
     return res.categories || [];
   },
 
+  async getAllCategories(includeInactive = false): Promise<Category[]> {
+    const res = await apiRequest<{ ok: boolean; categories: Category[] }>(`/admin/categories?includeInactive=${includeInactive}`);
+    return res.categories || [];
+  },
+
   async getCategoryBySlug(slug: string): Promise<Category> {
     const res = await apiRequest<{ ok: boolean; category: Category }>(`/products/categories/${slug}`);
     return res.category;
+  },
+
+  async createCategory(data: Partial<Category>): Promise<Category> {
+    const res = await apiRequest<{ ok: boolean; category: Category }>("/admin/categories", {
+      method: "POST",
+      body: JSON.stringify(data)
+    });
+    return res.category;
+  },
+
+  async updateCategory(id: string, data: Partial<Category>): Promise<Category> {
+    const res = await apiRequest<{ ok: boolean; category: Category }>(`/admin/categories/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(data)
+    });
+    return res.category;
+  },
+
+  async deleteCategory(id: string): Promise<void> {
+    await apiRequest(`/admin/categories/${id}`, { method: "DELETE" });
+  },
+
+  async reorderCategories(orderedIds: string[]): Promise<void> {
+    await apiRequest("/admin/categories/reorder", {
+      method: "POST",
+      body: JSON.stringify({ orderedIds })
+    });
   },
 
   async getProducts(params: {

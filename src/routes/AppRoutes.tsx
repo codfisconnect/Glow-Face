@@ -32,6 +32,7 @@ import { AdminDashboard } from "../pages/Admin/AdminDashboard";
 import { AdminOrders } from "../pages/Admin/AdminOrders";
 import { AdminOrderDetail } from "../pages/Admin/AdminOrderDetail";
 import { AdminProducts } from "../pages/Admin/AdminProducts";
+import { AdminCategories } from "../pages/Admin/AdminCategories";
 import { AdminInventory } from "../pages/Admin/AdminInventory";
 import { AdminCustomers } from "../pages/Admin/AdminCustomers";
 import { AdminActivity } from "../pages/Admin/AdminActivity";
@@ -152,6 +153,7 @@ export const AppRoutes: React.FC = () => {
           <Route path="orders" element={<AdminOrders />} />
           <Route path="orders/:id" element={<AdminOrderDetail />} />
           <Route path="products" element={<AdminProducts />} />
+          <Route path="categories" element={<AdminCategories />} />
           <Route path="inventory" element={<AdminInventory />} />
           <Route path="customers" element={<AdminCustomers />} />
           <Route path="activity" element={<AdminActivity />} />

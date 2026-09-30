@@ -11,6 +11,7 @@ router.get("/:slug", productController.getProductBySlug);
 // Admin catalog management
 router.post("/", requireAdmin, productController.createProduct);
 router.patch("/:id", requireAdmin, productController.updateProduct);
+router.put("/:id", requireAdmin, productController.updateProduct);
 router.delete("/:id", requireAdmin, productController.deleteProduct);
 
 export default router;

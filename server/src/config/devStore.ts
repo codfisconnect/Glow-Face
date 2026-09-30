@@ -108,7 +108,7 @@ export class DevStore {
       }
     ];
 
-    categoriesList.forEach(c => this.categories.set(c.slug, c));
+    categoriesList.forEach(c => this.categories.set(c.id, c));
 
     // 2. Seed Skincare Products
     const productsList: Product[] = [

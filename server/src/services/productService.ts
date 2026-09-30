@@ -167,17 +167,138 @@ export class ProductService {
   }
 
   async getCategories(): Promise<Category[]> {
+    return this.getAllCategories(false);
+  }
+
+  async getAllCategories(includeInactive = false): Promise<Category[]> {
     const { type, db } = getDatabase();
     if (type === "prisma") {
       const cats = await db.category.findMany({
-        where: { active: true },
+        where: includeInactive ? undefined : { active: true },
         orderBy: { sortOrder: "asc" }
       });
       return cats;
     }
     return Array.from(db.categories.values())
-      .filter(c => c.active)
+      .filter(c => includeInactive || c.active)
       .sort((a, b) => a.sortOrder - b.sortOrder);
+  }
+
+  async getCategoryBySlug(slug: string): Promise<Category | null> {
+    const { type, db } = getDatabase();
+    if (type === "prisma") {
+      return await db.category.findFirst({
+        where: { OR: [{ slug }, { id: slug }] }
+      });
+    }
+    const cat = Array.from(db.categories.values()).find(c => c.slug === slug || c.id === slug);
+    return cat || null;
+  }
+
+  async createCategory(data: any): Promise<Category> {
+    const { type, db } = getDatabase();
+    const id = `cat_${Date.now()}`;
+    const slug = (data.slug || data.name).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
+    const newCategory: Category = {
+      id,
+      name: data.name,
+      slug,
+      description: data.description || null,
+      icon: data.icon || null,
+      image: data.image || null,
+      sortOrder: Number(data.sortOrder ?? 0),
+      active: data.active !== false,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    if (type === "prisma") {
+      return await db.category.create({
+        data: {
+          id: newCategory.id,
+          name: newCategory.name,
+          slug: newCategory.slug,
+          description: newCategory.description,
+          icon: newCategory.icon,
+          image: newCategory.image,
+          sortOrder: newCategory.sortOrder,
+          active: newCategory.active
+        }
+      });
+    }
+
+    db.categories.set(newCategory.id, newCategory);
+    return newCategory;
+  }
+
+  async updateCategory(idOrSlug: string, updates: any): Promise<Category> {
+    const { type, db } = getDatabase();
+    if (type === "prisma") {
+      const existing = await db.category.findFirst({
+        where: { OR: [{ id: idOrSlug }, { slug: idOrSlug }] }
+      });
+      if (!existing) throw new HttpError(404, "Category not found");
+      return await db.category.update({
+        where: { id: existing.id },
+        data: updates
+      });
+    }
+
+    const cat = Array.from(db.categories.values()).find(c => c.id === idOrSlug || c.slug === idOrSlug);
+    if (!cat) throw new HttpError(404, "Category not found");
+
+    const updated = {
+      ...cat,
+      ...updates,
+      updatedAt: new Date()
+    };
+    db.categories.set(cat.id, updated);
+    return updated;
+  }
+
+  async deleteCategory(idOrSlug: string): Promise<{ success: boolean }> {
+    const { type, db } = getDatabase();
+    if (type === "prisma") {
+      const existing = await db.category.findFirst({
+        where: { OR: [{ id: idOrSlug }, { slug: idOrSlug }] }
+      });
+      if (existing) {
+        await db.category.update({ where: { id: existing.id }, data: { active: false } });
+      }
+      return { success: true };
+    }
+
+    const cat = Array.from(db.categories.values()).find(c => c.id === idOrSlug || c.slug === idOrSlug);
+    if (cat) {
+      cat.active = false;
+      db.categories.set(cat.id, cat);
+    }
+    return { success: true };
+  }
+
+  async reorderCategories(orderedIds: string[]): Promise<{ success: boolean }> {
+    const { type, db } = getDatabase();
+    if (type === "prisma") {
+      await Promise.all(
+        orderedIds.map((id, index) =>
+          db.category.update({
+            where: { id },
+            data: { sortOrder: index + 1 }
+          }).catch(() => {})
+        )
+      );
+      return { success: true };
+    }
+
+    orderedIds.forEach((id, index) => {
+      const cat = Array.from(db.categories.values()).find(c => c.id === id || c.slug === id);
+      if (cat) {
+        cat.sortOrder = index + 1;
+        db.categories.set(cat.id, cat);
+      }
+    });
+    return { success: true };
   }
 
   async createProduct(data: any): Promise<Product> {

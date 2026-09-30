@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { adminController } from "../controllers/adminController.js";
+import { productController } from "../controllers/productController.js";
 import { requireAdmin } from "../middleware/auth.js";
 
 const router = Router();
@@ -21,6 +22,13 @@ router.post("/settings", adminController.updateSetting);
 router.get("/coupons", adminController.getCoupons);
 router.post("/coupons", adminController.createCoupon);
 router.patch("/coupons/:id", adminController.updateCoupon);
+
+// Category management
+router.get("/categories", productController.getAllCategories);
+router.post("/categories", productController.createCategory);
+router.patch("/categories/:id", productController.updateCategory);
+router.delete("/categories/:id", productController.deleteCategory);
+router.post("/categories/reorder", productController.reorderCategories);
 
 // Diagnostics & audit logs
 router.get("/logs/notifications", adminController.getNotificationLogs);
