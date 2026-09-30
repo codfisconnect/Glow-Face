@@ -57,10 +57,13 @@ export interface CartItem {
   id: string; // product id
   productId: string;
   name: string;
+  shortName?: string;
   slug: string;
   price: number;
+  originalPrice?: number | null;
   quantity: number;
   image: string;
+  stock?: number;
   maxStock?: number;
 }
 

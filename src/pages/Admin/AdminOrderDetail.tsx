@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Save, Truck, CheckCircle, Mail, MessageCircle, AlertCircle } from "lucide-react";
-import { orderService } from "../../services/orderService";
+import { orderService } from "../../services";
 import { Order, OrderStatus } from "../../types";
-import { useToast } from "../../context/ToastContext";
+import { useToast } from "../../contexts/ToastContext";
 import "./AdminOrderDetail.css";
 
 export const AdminOrderDetail: React.FC = () => {
@@ -113,7 +113,7 @@ export const AdminOrderDetail: React.FC = () => {
                     onChange={e => setStatus(e.target.value as OrderStatus)}
                   >
                     <option value="PAID">PAID (Order Confirmed)</option>
-                    <option value="PROCESSING">PROCESSING (Packing in Grove)</option>
+                    <option value="PROCESSING">PROCESSING (Processing Order)</option>
                     <option value="PACKED">PACKED (Ready for Pickup)</option>
                     <option value="SHIPPED">SHIPPED (In Transit with Tracking)</option>
                     <option value="OUT_FOR_DELIVERY">OUT FOR DELIVERY</option>

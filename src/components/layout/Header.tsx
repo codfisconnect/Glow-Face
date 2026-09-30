@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Search, ShoppingBag, Heart, User as UserIcon, Menu, X, ChevronDown, ShieldAlert, LogOut } from "lucide-react";
-import { useCart } from "../../context/CartContext";
-import { useWishlist } from "../../context/WishlistContext";
-import { useAuth } from "../../context/AuthContext";
+import { Search, ShoppingBag, Heart, User as UserIcon, Menu, X, ChevronDown, ShieldAlert, LogOut, Home as HomeIcon } from "lucide-react";
+import { useCart } from "../../contexts/CartContext";
+import { useWishlist } from "../../contexts/WishlistContext";
+import { useAuth } from "../../contexts/AuthContext";
+import { productService } from "../../services";
 import "./Header.css";
 
 interface HeaderProps {
@@ -17,6 +18,7 @@ export const Header: React.FC<HeaderProps> = ({ onSearchOpen }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [shopDropdownOpen, setShopDropdownOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+  const [mobileSearch, setMobileSearch] = useState("");
   const dropdownRef = useRef<HTMLDivElement>(null);
   const userRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
@@ -55,15 +57,42 @@ export const Header: React.FC<HeaderProps> = ({ onSearchOpen }) => {
     };
   }, [mobileMenuOpen]);
 
-  const categories = [
+  const handleMobileSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (mobileSearch.trim()) {
+      navigate(`/shop?search=${encodeURIComponent(mobileSearch.trim())}`);
+      setMobileMenuOpen(false);
+      setMobileSearch("");
+    }
+  };
+
+  const [categories, setCategories] = useState<{ label: string; href: string; desc: string }[]>([
     { label: "All Products", href: "/shop", desc: "View complete skincare collection" },
-    { label: "Face Cream", href: "/category/face-cream", desc: "Targeted radiance & barrier care" },
-    { label: "Face Wash", href: "/category/face-wash", desc: "Gentle non-stripping cleansers" },
-    { label: "Sunscreen", href: "/category/sunscreen", desc: "SPF 50+ mineral UV defense" },
-    { label: "Hand Wash", href: "/category/hand-wash", desc: "Nourishing herbal therapy" },
-    { label: "Lip Care", href: "/category/lip-care", desc: "Cocoa butter healing balms" },
-    { label: "Body Care", href: "/category/body-care", desc: "Papaya brightening bars" }
-  ];
+    { label: "Face Cream", href: "/category/face-cream", desc: "Targeted radiance & moisture care" },
+    { label: "Face Wash", href: "/category/face-wash", desc: "Gentle daily cleansers" },
+    { label: "Sunscreen", href: "/category/sunscreen", desc: "Daily broad-spectrum defense" },
+    { label: "Hand Wash", href: "/category/hand-wash", desc: "Nourishing botanical cleansers" },
+    { label: "Lip Care", href: "/category/lip-care", desc: "Conditioning lip balms" },
+    { label: "Body Care", href: "/category/body-care", desc: "Gentle cleansing soap bars" }
+  ]);
+
+  useEffect(() => {
+    productService.getCategories()
+      .then(cats => {
+        if (cats && cats.length > 0) {
+          const dynamicList = [
+            { label: "All Products", href: "/shop", desc: "View complete skincare collection" },
+            ...cats.filter(c => c.active !== false).map(c => ({
+              label: c.name,
+              href: `/category/${c.slug}`,
+              desc: c.description || `Explore ${c.name.toLowerCase()} essentials`
+            }))
+          ];
+          setCategories(dynamicList);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   return (
     <header className="gf-header">
@@ -136,7 +165,7 @@ export const Header: React.FC<HeaderProps> = ({ onSearchOpen }) => {
           {/* Search Trigger */}
           <button
             type="button"
-            className="gf-icon-btn"
+            className="gf-icon-btn gf-search-btn"
             onClick={onSearchOpen || (() => navigate("/shop"))}
             aria-label="Search products"
           >
@@ -284,7 +313,49 @@ export const Header: React.FC<HeaderProps> = ({ onSearchOpen }) => {
             </div>
 
             <div className="gf-mobile-drawer__body">
-              <div className="gf-mobile-section-label">SHOP COLLECTIONS</div>
+              {/* Quick Search */}
+              <form className="gf-mobile-search-form" onSubmit={handleMobileSearch}>
+                <input
+                  type="text"
+                  placeholder="Search products..."
+                  value={mobileSearch}
+                  onChange={e => setMobileSearch(e.target.value)}
+                  className="gf-mobile-search-input"
+                  aria-label="Search products"
+                />
+                <button type="submit" className="gf-mobile-search-submit" aria-label="Search">
+                  <Search size={18} />
+                </button>
+              </form>
+
+              {/* Quick Navigation Badges */}
+              <div className="gf-mobile-quick-nav">
+                <Link to="/" className="gf-mobile-quick-btn" onClick={() => setMobileMenuOpen(false)}>
+                  <HomeIcon size={16} />
+                  <span>Home</span>
+                </Link>
+                <Link to="/shop" className="gf-mobile-quick-btn" onClick={() => setMobileMenuOpen(false)}>
+                  <ShoppingBag size={16} />
+                  <span>Shop</span>
+                </Link>
+                <Link to="/wishlist" className="gf-mobile-quick-btn" onClick={() => setMobileMenuOpen(false)}>
+                  <Heart size={16} />
+                  <span>Wishlist {wishlist.length > 0 ? `(${wishlist.length})` : ""}</span>
+                </Link>
+                <button
+                  type="button"
+                  className="gf-mobile-quick-btn"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    setIsCartOpen(true);
+                  }}
+                >
+                  <ShoppingBag size={16} />
+                  <span>Cart {cartCount > 0 ? `(${cartCount})` : ""}</span>
+                </button>
+              </div>
+
+              <div className="gf-mobile-section-label">CATEGORIES</div>
               <ul className="gf-mobile-links">
                 {categories.map(cat => (
                   <li key={cat.href}>
@@ -299,7 +370,7 @@ export const Header: React.FC<HeaderProps> = ({ onSearchOpen }) => {
                 ))}
               </ul>
 
-              <div className="gf-mobile-section-label">BRAND & ORDERS</div>
+              <div className="gf-mobile-section-label">BRAND & SUPPORT</div>
               <ul className="gf-mobile-links">
                 <li>
                   <Link
@@ -308,6 +379,15 @@ export const Header: React.FC<HeaderProps> = ({ onSearchOpen }) => {
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     About Glow Face
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/contact"
+                    className="gf-mobile-link"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Contact Us
                   </Link>
                 </li>
                 <li>

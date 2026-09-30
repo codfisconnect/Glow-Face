@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { productService } from "../../services/productService";
+import { productService } from "../../services";
 import { Product, Category } from "../../types";
 import { ProductGrid } from "../../components/product/ProductGrid/ProductGrid";
 import { InstagramFeed } from "../../components/social/InstagramFeed";
@@ -26,7 +26,7 @@ export const Home: React.FC = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  // Category imagery map using actual assets
+  // Category imagery map using actual assets with graceful fallback
   const categoryImages: Record<string, string> = {
     "face-cream": "/assets/cream-hero.jpg",
     "face-wash": "/assets/cream-open.jpg",
@@ -47,18 +47,13 @@ export const Home: React.FC = () => {
               AUTHENTIC BOTANICAL FORMULATIONS FOR RADIANT SKIN
             </h1>
             <p className="gf-home-hero__sub">
-              Target hyperpigmentation, uneven skin tone, and dryness with concentrated Kojic Acid, Alpha Arbutin, and pure botanical extracts.
+              Target uneven skin tone and dryness with gentle, skin-loving botanical formulations.
             </p>
 
             <div className="gf-home-hero__cta-group">
               <Link to="/shop">
                 <Button variant="primary" size="lg" icon={<ArrowRight size={18} />} iconPosition="right">
                   SHOP NOW
-                </Button>
-              </Link>
-              <Link to="/shop">
-                <Button variant="outline" size="lg">
-                  EXPLORE PRODUCTS
                 </Button>
               </Link>
             </div>
@@ -111,7 +106,7 @@ export const Home: React.FC = () => {
       <section className="gf-home-section gf-home-categories" aria-label="Shop By Category">
         <div className="gf-container">
           <div className="gf-home-section__header">
-            <span className="gf-home-section__eyebrow">CURATED REGIMENS</span>
+            <span className="gf-home-section__eyebrow">CATEGORIES</span>
             <h2 className="gf-home-section__title">SHOP BY CATEGORY</h2>
             <p className="gf-home-section__subtitle">
               Browse individual skincare categories tailored for every step of your routine.
@@ -120,7 +115,7 @@ export const Home: React.FC = () => {
 
           <div className="gf-category-visual-grid">
             {categories.map(cat => {
-              const bgImg = categoryImages[cat.slug] || "/assets/cream-hero.jpg";
+              const bgImg = cat.image || categoryImages[cat.slug] || "/assets/cream-hero.jpg";
               return (
                 <Link
                   key={cat.slug}

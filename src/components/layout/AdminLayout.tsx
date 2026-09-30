@@ -14,8 +14,8 @@ import {
   Menu,
   X
 } from "lucide-react";
-import { useAuth } from "../../context/AuthContext";
-import { adminService } from "../../services/adminService";
+import { useAuth } from "../../contexts/AuthContext";
+import { adminService } from "../../services";
 import { AdminNotification } from "../../types";
 import "./AdminLayout.css";
 

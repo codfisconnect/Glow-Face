@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { CheckCircle2, Package, MapPin, ArrowRight, Printer, MessageCircle } from "lucide-react";
-import { orderService } from "../../services/orderService";
+import { orderService } from "../../services";
 import { Order } from "../../types";
 import "./PaymentSuccess.css";
 

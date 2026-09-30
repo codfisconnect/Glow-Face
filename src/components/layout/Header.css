@@ -369,6 +369,77 @@
   gap: 16px;
 }
 
+/* Mobile Search Form */
+.gf-mobile-search-form {
+  display: flex;
+  align-items: center;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  padding: 4px 6px 4px 14px;
+  margin-bottom: 4px;
+}
+
+.gf-mobile-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  font-family: inherit;
+}
+
+.gf-mobile-search-submit {
+  background: var(--green);
+  color: var(--white);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.gf-mobile-search-submit:hover {
+  background: var(--green-dark);
+}
+
+/* Mobile Quick Navigation */
+.gf-mobile-quick-nav {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.gf-mobile-quick-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 4px;
+  background: var(--cream);
+  border-radius: var(--radius-sm);
+  color: var(--green-dark);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: var(--transition);
+}
+
+.gf-mobile-quick-btn:hover {
+  background: var(--green-soft);
+  border-color: var(--green-light);
+  color: var(--green);
+}
+
 .gf-mobile-section-label {
   font-size: 0.72rem;
   font-weight: 700;
@@ -435,20 +506,52 @@
 
 @media (max-width: 480px) {
   .gf-header-container {
-    padding: 10px 14px;
-    gap: 12px;
+    padding: 10px 12px;
+    gap: 8px;
   }
   .gf-logo-main {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
     letter-spacing: 1px;
   }
   .gf-logo-sub {
-    font-size: 0.55rem;
-    letter-spacing: 1px;
+    font-size: 0.5rem;
+    letter-spacing: 0.5px;
   }
   .gf-icon-btn {
     padding: 6px;
-    min-width: 38px;
-    min-height: 38px;
+    min-width: 36px;
+    min-height: 36px;
+  }
+}
+
+/* Hardening for narrow screens below 380px: secondary actions move to mobile drawer */
+@media (max-width: 380px) {
+  .gf-header-actions .gf-search-btn,
+  .gf-header-actions .gf-wishlist-btn {
+    display: none;
+  }
+  .gf-header-container {
+    padding: 8px 10px;
+    gap: 6px;
+  }
+  .gf-logo-main {
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+  }
+  .gf-logo-sub {
+    display: none;
+  }
+}
+
+/* Ultra-narrow screens below 340px (320px support) */
+@media (max-width: 340px) {
+  .gf-header-actions .gf-user-menu-wrapper {
+    display: none;
+  }
+  .gf-header-container {
+    padding: 8px 8px;
+  }
+  .gf-logo-main {
+    font-size: 1.05rem;
   }
 }

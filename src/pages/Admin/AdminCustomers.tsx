@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Search, Users, ShoppingBag, IndianRupee, Mail, Phone, Calendar } from "lucide-react";
-import { adminService } from "../../services/adminService";
+import { adminService } from "../../services";
 import "./AdminCustomers.css";
 
 interface Customer {

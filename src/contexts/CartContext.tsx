@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { CartItem, Product } from "../types";
+import { Product, CartItem } from "../types";
+import { BRAND } from "../constants";
 
-interface CartContextType {
+export interface CartContextType {
   cartItems: CartItem[];
   cartCount: number;
   cartTotal: number;
@@ -10,20 +11,17 @@ interface CartContextType {
   isCartOpen: boolean;
   setIsCartOpen: (open: boolean) => void;
   addToCart: (product: Product, quantity?: number) => void;
-  removeFromCart: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
+  removeFromCart: (productId: string) => void;
   clearCart: () => void;
 }
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
-
-const FREE_SHIPPING_THRESHOLD = 499;
-const STANDARD_SHIPPING_FEE = 49;
+export const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    const saved = localStorage.getItem("glow_cart");
     try {
-      const saved = localStorage.getItem("glow_cart");
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
@@ -33,54 +31,38 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   useEffect(() => {
-    try {
-      localStorage.setItem("glow_cart", JSON.stringify(cartItems));
-    } catch (err) {
-      console.warn("Could not save cart to localStorage", err);
-    }
+    localStorage.setItem("glow_cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-  const cartTotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-  const shipping = cartTotal >= FREE_SHIPPING_THRESHOLD || cartTotal === 0 ? 0 : STANDARD_SHIPPING_FEE;
-
-  const addToCart = (product: Product, quantity: number = 1) => {
+  const addToCart = (product: Product, quantity = 1) => {
+    if (quantity <= 0) return;
     setCartItems(prev => {
-      const existing = prev.find(item => item.productId === product.id || item.slug === product.slug);
-      const maxStock = product.stock !== undefined ? product.stock : 999;
-
+      const existing = prev.find(item => item.id === product.id);
       if (existing) {
-        const newQty = Math.min(existing.quantity + quantity, maxStock);
         return prev.map(item =>
-          item.productId === existing.productId
-            ? { ...item, quantity: newQty }
+          item.id === product.id
+            ? { ...item, quantity: Math.min(product.stock || 99, item.quantity + quantity) }
             : item
         );
       }
-
-      const initialQty = Math.min(quantity, maxStock);
-      if (initialQty < 1) return prev; // out of stock guard
-
       return [
         ...prev,
         {
           id: product.id,
           productId: product.id,
           name: product.name,
-          slug: product.slug,
+          shortName: product.shortName || product.name,
           price: product.price,
-          quantity: initialQty,
+          originalPrice: product.originalPrice,
           image: product.image,
-          maxStock
+          slug: product.slug,
+          stock: product.stock,
+          maxStock: product.stock,
+          quantity: Math.min(product.stock || 99, quantity)
         }
       ];
     });
-
     setIsCartOpen(true);
-  };
-
-  const removeFromCart = (productId: string) => {
-    setCartItems(prev => prev.filter(item => item.productId !== productId && item.id !== productId));
   };
 
   const updateQuantity = (productId: string, quantity: number) => {
@@ -90,18 +72,28 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
     setCartItems(prev =>
       prev.map(item => {
-        if (item.productId === productId || item.id === productId) {
-          const max = item.maxStock || 999;
-          return { ...item, quantity: Math.min(quantity, max) };
+        if (item.id === productId) {
+          const maxStock = item.stock || 99;
+          return { ...item, quantity: Math.min(maxStock, quantity) };
         }
         return item;
       })
     );
   };
 
+  const removeFromCart = (productId: string) => {
+    setCartItems(prev => prev.filter(item => item.id !== productId));
+  };
+
   const clearCart = () => {
     setCartItems([]);
+    localStorage.removeItem("glow_cart");
   };
+
+  const cartCount = cartItems.reduce((acc, it) => acc + it.quantity, 0);
+  const cartTotal = cartItems.reduce((acc, it) => acc + it.price * it.quantity, 0);
+  const freeShippingThreshold = BRAND.shipping.freeThreshold;
+  const shipping = cartTotal >= freeShippingThreshold || cartTotal === 0 ? 0 : BRAND.shipping.standardFee;
 
   return (
     <CartContext.Provider
@@ -110,12 +102,12 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         cartCount,
         cartTotal,
         shipping,
-        freeShippingThreshold: FREE_SHIPPING_THRESHOLD,
+        freeShippingThreshold,
         isCartOpen,
         setIsCartOpen,
         addToCart,
-        removeFromCart,
         updateQuantity,
+        removeFromCart,
         clearCart
       }}
     >

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Check, Sparkles } from "lucide-react";
-import { productService } from "../../services/productService";
+import { productService } from "../../services";
 import { Product } from "../../types";
 import { ProductGallery } from "../../components/product/ProductGallery/ProductGallery";
 import { ProductInfo } from "../../components/product/ProductInfo/ProductInfo";

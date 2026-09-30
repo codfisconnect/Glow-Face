@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Lock, Mail, ArrowRight, AlertCircle, Shield } from "lucide-react";
-import { useAuth } from "../../context/AuthContext";
-import { useToast } from "../../context/ToastContext";
+import { Lock, Mail, ArrowRight, AlertCircle } from "lucide-react";
+import { useAuth } from "../../contexts/AuthContext";
+import { useToast } from "../../contexts/ToastContext";
 import "./Auth.css";
 
 export const Login: React.FC = () => {
@@ -88,11 +88,6 @@ export const Login: React.FC = () => {
             <ArrowRight size={18} />
           </button>
         </form>
-
-        <div className="gf-auth-demo-hint">
-          <Shield size={14} color="var(--gold-dark)" />
-          <span>Admin Login: <strong>admin@glowface.com</strong> / <strong>GlowAdmin2026!</strong></span>
-        </div>
 
         <div className="gf-auth-footer">
           <span>Don't have an account yet?</span>

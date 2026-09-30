@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { X, Trash2, Plus, Minus, ArrowRight, ShoppingBag, ShieldCheck } from "lucide-react";
-import { useCart } from "../../context/CartContext";
+import { useCart } from "../../contexts/CartContext";
 import "./CartDrawer.css";
 
 export const CartDrawer: React.FC = () => {

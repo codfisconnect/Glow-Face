@@ -1,20 +1,20 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { Product } from "../types";
 
-interface WishlistContextType {
+export interface WishlistContextType {
   wishlist: Product[];
-  wishlistIds: string[];
-  isInWishlist: (productIdOrSlug: string) => boolean;
+  isInWishlist: (productId: string) => boolean;
   toggleWishlist: (product: Product) => void;
-  removeFromWishlist: (productIdOrSlug: string) => void;
+  removeFromWishlist: (productId: string) => void;
+  clearWishlist: () => void;
 }
 
-const WishlistContext = createContext<WishlistContextType | undefined>(undefined);
+export const WishlistContext = createContext<WishlistContextType | undefined>(undefined);
 
 export const WishlistProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [wishlist, setWishlist] = useState<Product[]>(() => {
+    const saved = localStorage.getItem("glow_wishlist");
     try {
-      const saved = localStorage.getItem("glow_wishlist");
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
@@ -22,41 +22,40 @@ export const WishlistProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   });
 
   useEffect(() => {
-    try {
-      localStorage.setItem("glow_wishlist", JSON.stringify(wishlist));
-    } catch (err) {
-      console.warn("Could not save wishlist to localStorage", err);
-    }
+    localStorage.setItem("glow_wishlist", JSON.stringify(wishlist));
   }, [wishlist]);
 
-  const wishlistIds = wishlist.map(p => p.id);
-
-  const isInWishlist = (idOrSlug: string) => {
-    return wishlist.some(p => p.id === idOrSlug || p.slug === idOrSlug);
+  const isInWishlist = (productId: string) => {
+    return wishlist.some(item => item.id === productId);
   };
 
   const toggleWishlist = (product: Product) => {
     setWishlist(prev => {
-      const exists = prev.some(p => p.id === product.id || p.slug === product.slug);
+      const exists = prev.some(item => item.id === product.id);
       if (exists) {
-        return prev.filter(p => p.id !== product.id && p.slug !== product.slug);
+        return prev.filter(item => item.id !== product.id);
       }
       return [...prev, product];
     });
   };
 
-  const removeFromWishlist = (idOrSlug: string) => {
-    setWishlist(prev => prev.filter(p => p.id !== idOrSlug && p.slug !== idOrSlug));
+  const removeFromWishlist = (productId: string) => {
+    setWishlist(prev => prev.filter(item => item.id !== productId));
+  };
+
+  const clearWishlist = () => {
+    setWishlist([]);
+    localStorage.removeItem("glow_wishlist");
   };
 
   return (
     <WishlistContext.Provider
       value={{
         wishlist,
-        wishlistIds,
         isInWishlist,
         toggleWishlist,
-        removeFromWishlist
+        removeFromWishlist,
+        clearWishlist
       }}
     >
       {children}

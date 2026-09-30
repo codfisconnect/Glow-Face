@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Clock, Filter, Search, ShieldCheck, ShoppingBag, Layers, AlertCircle, RefreshCw } from "lucide-react";
-import { adminService } from "../../services/adminService";
+import { adminService } from "../../services";
 import "./AdminActivity.css";
 
 interface Activity {

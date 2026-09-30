@@ -107,6 +107,29 @@ export const About: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* 5. Contact & Social CTA */}
+      <section className="gf-about-social-cta gf-container">
+        <div className="gf-about-social-box">
+          <span className="gf-about-section-tag">STAY CONNECTED</span>
+          <h3>TALK WITH GLOW FACE</h3>
+          <p>
+            Have inquiries about our botanical formulations or need direct assistance? Our customer care is always glad to help.
+          </p>
+          <div className="gf-about-social-actions">
+            <Link to="/contact">
+              <Button variant="primary" size="md">
+                CONTACT CUSTOMER CARE
+              </Button>
+            </Link>
+            <a href="https://www.instagram.com/glowface.kl/" target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" size="md">
+                FOLLOW @GLOWFACE.KL
+              </Button>
+            </a>
+          </div>
+        </div>
+      </section>
     </article>
   );
 };

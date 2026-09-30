@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Search, Filter, ChevronRight, Eye } from "lucide-react";
-import { orderService } from "../../services/orderService";
+import { orderService } from "../../services";
 import { Order } from "../../types";
 import "./AdminOrders.css";
 

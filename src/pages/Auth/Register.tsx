@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Lock, Mail, User, Phone, ArrowRight, AlertCircle } from "lucide-react";
-import { useAuth } from "../../context/AuthContext";
-import { useToast } from "../../context/ToastContext";
+import { useAuth } from "../../contexts/AuthContext";
+import { useToast } from "../../contexts/ToastContext";
 import "./Auth.css";
 
 export const Register: React.FC = () => {
@@ -90,7 +90,7 @@ export const Register: React.FC = () => {
               <Phone size={16} className="gf-auth-input-icon" />
               <input
                 type="tel"
-                placeholder="9845012345"
+                placeholder="8778548891"
                 maxLength={10}
                 value={phone}
                 onChange={e => setPhone(e.target.value)}

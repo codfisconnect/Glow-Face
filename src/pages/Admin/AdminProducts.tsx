@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Plus, Edit2, Trash2, Check, X, Search, Image as ImageIcon } from "lucide-react";
-import { productService } from "../../services/productService";
+import { productService } from "../../services";
 import { Product, Category } from "../../types";
-import { useToast } from "../../context/ToastContext";
+import { useToast } from "../../contexts/ToastContext";
+import { Modal } from "../../components/common/Modal/Modal";
 import "./AdminProducts.css";
 
 export const AdminProducts: React.FC = () => {
@@ -235,18 +236,16 @@ export const AdminProducts: React.FC = () => {
       </div>
 
       {/* Add / Edit Modal */}
-      {modalOpen && (
-        <div className="gf-modal-backdrop" onClick={() => setModalOpen(false)}>
-          <div className="gf-modal-card" onClick={e => e.stopPropagation()}>
-            <div className="gf-modal-header">
-              <h3>{editingProduct ? "Edit Product Formulation" : "Add New Skincare Product"}</h3>
-              <button onClick={() => setModalOpen(false)}><X size={20} /></button>
-            </div>
-
-            <form onSubmit={handleSubmit} className="gf-modal-form">
-              <div className="gf-form-row gf-form-row-2">
-                <div className="gf-field">
-                  <label>Product Name *</label>
+      <Modal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        title={editingProduct ? "Edit Product Formulation" : "Add New Skincare Product"}
+        size="lg"
+      >
+        <form onSubmit={handleSubmit} className="gf-modal-form">
+          <div className="gf-form-row gf-form-row-2">
+            <div className="gf-field">
+              <label>Product Name *</label>
                   <input
                     type="text"
                     required
@@ -393,9 +392,7 @@ export const AdminProducts: React.FC = () => {
                 </button>
               </div>
             </form>
-          </div>
-        </div>
-      )}
+      </Modal>
     </div>
   );
 };

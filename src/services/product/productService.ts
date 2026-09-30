@@ -1,5 +1,5 @@
-import { apiRequest } from "./api";
-import { Product, Category } from "../types";
+import { apiRequest } from "../api/api";
+import { Product, Category } from "../../types";
 
 export const productService = {
   async getCategories(): Promise<Category[]> {

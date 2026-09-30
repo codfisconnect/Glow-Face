@@ -66,9 +66,18 @@
   font-size: 0.78rem;
 }
 
+.gf-ad-table-card {
+  background: #FFFDF9;
+  border: 1px solid #D8E8DC;
+  border-radius: 12px;
+  overflow-x: auto;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+}
+
 .gf-ad-inv-table-head {
   display: grid;
   grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  min-width: 820px;
   padding: 14px 20px;
   background: #F8FAF9;
   font-size: 0.76rem;
@@ -82,6 +91,7 @@
 .gf-ad-inv-table-row {
   display: grid;
   grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  min-width: 820px;
   padding: 14px 20px;
   align-items: center;
   border-bottom: 1px solid #F0F4F1;

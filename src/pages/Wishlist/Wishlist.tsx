@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Heart, ShoppingBag, Trash2 } from "lucide-react";
-import { useWishlist } from "../../context/WishlistContext";
-import { useCart } from "../../context/CartContext";
-import { useToast } from "../../context/ToastContext";
+import { useWishlist } from "../../contexts/WishlistContext";
+import { useCart } from "../../contexts/CartContext";
+import { useToast } from "../../contexts/ToastContext";
 import "./Wishlist.css";
 
 export const Wishlist: React.FC = () => {

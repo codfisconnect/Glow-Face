@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ShieldCheck, MessageCircle, Mail, Phone, MapPin } from "lucide-react";
 import { Instagram } from "../common/InstagramIcon";
+import { BRAND } from "../../constants";
 import "./Footer.css";
 
 export const Footer: React.FC = () => {
@@ -9,27 +10,29 @@ export const Footer: React.FC = () => {
     <footer className="gf-footer">
       <div className="gf-footer-top">
         <div className="gf-footer-container">
-          {/* Column 1: Brand & Kerala Roots */}
+          {/* Column 1: Brand & Philosophy */}
           <div className="gf-footer-col gf-footer-brand">
-            <h3 className="gf-footer-logo">GLOW FACE</h3>
+            <h3 className="gf-footer-logo">{BRAND.name.toUpperCase()}</h3>
             <p className="gf-footer-desc">
-              Rooted in authentic Kerala Ayurvedic wisdom and modern dermatological science. Crafted with cold-pressed oils, potent botanical extracts, and bioactive fermentations for pure, natural radiance.
+              Glow Face crafts mindful botanical skincare formulations designed to support your natural skin barrier and reveal lasting radiance.
             </p>
             <div className="gf-footer-social">
               <a
-                href="https://instagram.com/glowfacecare"
+                href={BRAND.instagram.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="gf-social-pill"
+                aria-label={`Follow Glow Face on Instagram ${BRAND.instagram.handle}`}
               >
                 <Instagram size={18} />
-                <span>@glowfacecare</span>
+                <span>{BRAND.instagram.handle}</span>
               </a>
               <a
-                href="https://wa.me/919845012345?text=Hi%20Glow%20Face%2C%20I%20have%20a%20question%20about%20your%20skincare%20products"
+                href={BRAND.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="gf-social-pill gf-wa-pill"
+                aria-label={`Chat with Glow Face on WhatsApp ${BRAND.whatsappFormatted}`}
               >
                 <MessageCircle size={18} />
                 <span>WhatsApp Care</span>
@@ -43,10 +46,10 @@ export const Footer: React.FC = () => {
             <ul className="gf-footer-links">
               <li><Link to="/category/face-cream">Face Cream</Link></li>
               <li><Link to="/category/face-wash">Face Wash</Link></li>
-              <li><Link to="/category/sunscreen">Sunscreen SPF 50</Link></li>
-              <li><Link to="/category/hand-wash">Herbal Hand Wash</Link></li>
-              <li><Link to="/category/lip-care">Lip Balms & Care</Link></li>
-              <li><Link to="/category/body-care">Body Bars & Tan Care</Link></li>
+              <li><Link to="/category/sunscreen">Sunscreen</Link></li>
+              <li><Link to="/category/hand-wash">Hand Wash</Link></li>
+              <li><Link to="/category/lip-care">Lip Care</Link></li>
+              <li><Link to="/category/body-care">Body Care</Link></li>
               <li><Link to="/shop">Shop All Products</Link></li>
             </ul>
           </div>
@@ -56,11 +59,12 @@ export const Footer: React.FC = () => {
             <h4 className="gf-footer-heading">Customer Care</h4>
             <ul className="gf-footer-links">
               <li><Link to="/orders">Track Your Order</Link></li>
+              <li><Link to="/contact">Contact Us</Link></li>
               <li><Link to="/shipping">Shipping Policy</Link></li>
-              <li><Link to="/returns">7-Day Returns & Refunds</Link></li>
+              <li><Link to="/returns">7-Day Returns & Replacements</Link></li>
               <li><Link to="/privacy">Privacy Policy</Link></li>
               <li><Link to="/terms">Terms & Conditions</Link></li>
-              <li><Link to="/about">Our Story & Ingredients</Link></li>
+              <li><Link to="/about">About Glow Face</Link></li>
             </ul>
           </div>
 
@@ -69,24 +73,22 @@ export const Footer: React.FC = () => {
             <h4 className="gf-footer-heading">Direct Contact</h4>
             <div className="gf-contact-info">
               <div className="gf-contact-item">
-                <Mail size={16} />
-                <span>care@glowface.com</span>
+                <Mail size={16} aria-hidden="true" />
+                <a href={`mailto:${BRAND.email}`}>{BRAND.email}</a>
               </div>
               <div className="gf-contact-item">
-                <Phone size={16} />
-                <span>+91 98450 12345 (Mon-Sat, 9am - 7pm)</span>
-              </div>
-              <div className="gf-contact-item">
-                <MapPin size={16} />
-                <span>Kerala Botanical Herbals & Skincare, India</span>
+                <Phone size={16} aria-hidden="true" />
+                <a href={`tel:${BRAND.phone.replace(/\s+/g, "")}`}>
+                  {BRAND.phone}
+                </a>
               </div>
             </div>
 
             <div className="gf-trust-box">
-              <ShieldCheck size={20} color="var(--gold-dark)" />
+              <ShieldCheck size={20} color="var(--gold-dark)" aria-hidden="true" />
               <div>
-                <strong>100% Prepaid & Verified</strong>
-                <p>Protected by Razorpay 256-bit SSL encryption. All major UPI, Debit & Credit cards accepted.</p>
+                <strong>Secure Prepaid Transactions</strong>
+                <p>Protected by 256-bit SSL encryption. All major UPI, Debit, Credit cards & Net Banking accepted.</p>
               </div>
             </div>
           </div>
@@ -95,14 +97,14 @@ export const Footer: React.FC = () => {
 
       <div className="gf-footer-bottom">
         <div className="gf-footer-container gf-footer-bottom-inner">
-          <p>© {new Date().getFullYear()} Glow Face Skincare. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {BRAND.name} Skincare. All rights reserved.</p>
           <div className="gf-payment-methods">
             <span className="gf-pay-pill">UPI</span>
-            <span className="gf-pay-pill">Google Pay</span>
+            <span className="gf-pay-pill">GPay</span>
             <span className="gf-pay-pill">PhonePe</span>
             <span className="gf-pay-pill">Paytm</span>
-            <span className="gf-pay-pill">Visa / Mastercard / RuPay</span>
-            <span className="gf-pay-pill">NetBanking</span>
+            <span className="gf-pay-pill">Cards</span>
+            <span className="gf-pay-pill">Net Banking</span>
           </div>
         </div>
       </div>

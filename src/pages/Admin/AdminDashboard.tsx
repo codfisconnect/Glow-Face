@@ -11,7 +11,7 @@ import {
   CreditCard,
   Truck
 } from "lucide-react";
-import { adminService } from "../../services/adminService";
+import { adminService } from "../../services";
 import { DashboardMetrics } from "../../types";
 import "./AdminDashboard.css";
 

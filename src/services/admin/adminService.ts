@@ -1,5 +1,5 @@
-import { apiRequest } from "./api";
-import { DashboardMetrics, AdminNotification } from "../types";
+import { apiRequest } from "../api/api";
+import { DashboardMetrics, AdminNotification } from "../../types";
 
 export const adminService = {
   async getDashboardMetrics(range: string = "30d"): Promise<DashboardMetrics> {

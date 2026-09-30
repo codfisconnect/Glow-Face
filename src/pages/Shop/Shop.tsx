@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Search, SlidersHorizontal, X } from "lucide-react";
-import { productService } from "../../services/productService";
+import { productService } from "../../services";
 import { Product, Category } from "../../types";
 import { ProductGrid } from "../../components/product/ProductGrid/ProductGrid";
 import { EmptyState } from "../../components/common/EmptyState/EmptyState";

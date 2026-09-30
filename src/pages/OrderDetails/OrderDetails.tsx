@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { CheckCircle, Truck, Package, Clock, ArrowLeft, ExternalLink, MapPin } from "lucide-react";
-import { orderService } from "../../services/orderService";
+import { orderService } from "../../services";
 import { Order } from "../../types";
+import { BRAND } from "../../constants";
 import "./OrderDetails.css";
 
 const TIMELINE_STEPS = [
   { key: "PENDING_PAYMENT", label: "Payment Initiated" },
   { key: "PAID", label: "Payment Verified" },
   { key: "PROCESSING", label: "Preparing Order" },
-  { key: "PACKED", label: "Packed in Kerala Grove" },
+  { key: "PACKED", label: "Order Packed" },
   { key: "SHIPPED", label: "Dispatched / In Transit" },
   { key: "DELIVERED", label: "Delivered to Doorstep" }
 ];
@@ -174,12 +175,12 @@ export const OrderDetails: React.FC = () => {
               <h4>Need help with this order?</h4>
               <p>Our customer care team is available via WhatsApp or email.</p>
               <a
-                href={`https://wa.me/919845012345?text=Hi%20Glow%20Face%2C%20I%20have%20an%20inquiry%20regarding%20order%20%23${order.orderNumber || order.id}`}
+                href={`https://wa.me/${BRAND.whatsapp}?text=Hi%20Glow%20Face%2C%20I%20have%20an%20inquiry%20regarding%20order%20%23${order.orderNumber || order.id}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="gf-support-btn"
               >
-                Chat on WhatsApp
+                Chat on WhatsApp ({BRAND.whatsappFormatted})
               </a>
             </div>
           </div>

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Trash2, Plus, Minus, ArrowRight, ShieldCheck, Tag, ShoppingBag } from "lucide-react";
-import { useCart } from "../../context/CartContext";
-import { orderService } from "../../services/orderService";
-import { useToast } from "../../context/ToastContext";
+import { useCart } from "../../contexts/CartContext";
+import { paymentService } from "../../services";
+import { useToast } from "../../contexts/ToastContext";
 import "./Cart.css";
 
 export const Cart: React.FC = () => {
@@ -37,7 +37,7 @@ export const Cart: React.FC = () => {
     setCouponError("");
 
     try {
-      const res = await orderService.validateCoupon(couponInput.trim(), cartTotal);
+      const res = await paymentService.validateCoupon(couponInput.trim(), cartTotal);
       if (res.valid) {
         setCouponApplied({
           code: res.code,

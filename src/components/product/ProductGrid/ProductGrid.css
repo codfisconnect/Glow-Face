@@ -48,3 +48,10 @@
     gap: 10px;
   }
 }
+
+/* Very narrow mobile: 330px and below */
+@media (max-width: 330px) {
+  .gf-product-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

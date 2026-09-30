@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Star, ShoppingBag, Heart, Truck, RotateCcw, ShieldCheck, Minus, Plus } from "lucide-react";
 import { Product } from "../../../types";
-import { useCart } from "../../../context/CartContext";
-import { useWishlist } from "../../../context/WishlistContext";
-import { useToast } from "../../../context/ToastContext";
+import { useCart } from "../../../contexts/CartContext";
+import { useWishlist } from "../../../contexts/WishlistContext";
+import { useToast } from "../../../contexts/ToastContext";
 import "./ProductInfo.css";
 
 export interface ProductInfoProps {

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Routes, Route, Navigate, useLocation, Outlet } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 
 // Layout components
 import { Header } from "../components/layout/Header";
@@ -24,6 +24,7 @@ import { Login } from "../pages/Auth/Login";
 import { Register } from "../pages/Auth/Register";
 import { Profile } from "../pages/Profile/Profile";
 import { About } from "../pages/About/About";
+import { Contact } from "../pages/Contact/Contact";
 import { Shipping, Returns, Privacy, Terms } from "../pages/Policies/Policies";
 
 // Admin Pages
@@ -133,6 +134,7 @@ export const AppRoutes: React.FC = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/shipping" element={<Shipping />} />
           <Route path="/returns" element={<Returns />} />
           <Route path="/privacy" element={<Privacy />} />

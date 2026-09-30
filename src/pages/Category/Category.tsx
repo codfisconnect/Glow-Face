@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { productService } from "../../services/productService";
+import { productService } from "../../services";
 import { Product, Category as ICategory } from "../../types";
 import { ProductGrid } from "../../components/product/ProductGrid/ProductGrid";
 import { EmptyState } from "../../components/common/EmptyState/EmptyState";

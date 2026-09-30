@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Lock, ShieldCheck, ArrowRight, AlertCircle, ShoppingBag } from "lucide-react";
-import { useCart } from "../../context/CartContext";
-import { useAuth } from "../../context/AuthContext";
-import { orderService } from "../../services/orderService";
+import { useCart } from "../../contexts/CartContext";
+import { useAuth } from "../../contexts/AuthContext";
+import { orderService, paymentService } from "../../services";
 import "./Checkout.css";
 
 const INDIAN_STATES = [
@@ -128,7 +128,7 @@ export const Checkout: React.FC = () => {
       if (!sdkLoaded || !window.Razorpay || keyId === "rzp_test_YourKeyHere" || serverOrder.razorpayOrderId.startsWith("order_sim_")) {
         // Resilient development auto-verification
         console.log("Simulating checkout completion for local development...");
-        const verified = await orderService.verifyPayment({
+        const verified = await paymentService.verifyPayment({
           orderId: serverOrder.orderId,
           razorpayOrderId: serverOrder.razorpayOrderId,
           razorpayPaymentId: `pay_sim_${Date.now()}`,
@@ -160,7 +160,7 @@ export const Checkout: React.FC = () => {
         handler: async (response: any) => {
           try {
             // Server-side verification
-            await orderService.verifyPayment({
+            await paymentService.verifyPayment({
               orderId: serverOrder.orderId,
               razorpayOrderId: response.razorpay_order_id,
               razorpayPaymentId: response.razorpay_payment_id,

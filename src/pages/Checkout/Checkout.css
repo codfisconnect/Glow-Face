@@ -277,3 +277,12 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 600px) {
+  .gf-checkout-page {
+    padding: 20px 0 60px;
+  }
+  .gf-checkout-section {
+    padding: 20px 16px;
+  }
+}

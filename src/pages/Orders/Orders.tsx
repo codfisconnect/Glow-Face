@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Package, Search, ChevronRight, Clock, AlertCircle } from "lucide-react";
-import { orderService } from "../../services/orderService";
-import { useAuth } from "../../context/AuthContext";
+import { orderService } from "../../services";
+import { useAuth } from "../../contexts/AuthContext";
 import { Order } from "../../types";
 import "./Orders.css";
 

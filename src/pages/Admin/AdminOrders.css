@@ -74,13 +74,14 @@
   background: #FFFDF9;
   border: 1px solid #D8E8DC;
   border-radius: 12px;
-  overflow: hidden;
+  overflow-x: auto;
   box-shadow: 0 4px 15px rgba(0,0,0,0.02);
 }
 
 .gf-ad-table-head {
   display: grid;
   grid-template-columns: 1.4fr 1.2fr 2fr 1fr 1.2fr 1fr 1fr;
+  min-width: 840px;
   padding: 14px 20px;
   background: #F8FAF9;
   font-size: 0.76rem;
@@ -94,11 +95,13 @@
 .gf-ad-table-body {
   display: flex;
   flex-direction: column;
+  min-width: 840px;
 }
 
 .gf-ad-table-row {
   display: grid;
   grid-template-columns: 1.4fr 1.2fr 2fr 1fr 1.2fr 1fr 1fr;
+  min-width: 840px;
   padding: 16px 20px;
   align-items: center;
   border-bottom: 1px solid #F0F4F1;
@@ -247,12 +250,4 @@
 .gf-ad-pagination-btns button:disabled {
   opacity: 0.4;
   cursor: not-allowed;
-}
-
-@media (max-width: 1024px) {
-  .gf-ad-table-head,
-  .gf-ad-table-row {
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 8px;
-  }
 }

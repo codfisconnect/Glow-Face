@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Play, ExternalLink } from "lucide-react";
 import { Instagram } from "../common/InstagramIcon";
-import { socialService } from "../../services/socialService";
+import { socialService } from "../../services";
 import { InstagramFeed as IFeed } from "../../types";
+import { BRAND } from "../../constants";
 import "./InstagramFeed.css";
 
 export const InstagramFeed: React.FC = () => {
@@ -29,13 +30,13 @@ export const InstagramFeed: React.FC = () => {
           <span className="gf-social-sub">Follow The Glow</span>
           <h2 className="gf-social-title">JOIN OUR RADIANT COMMUNITY</h2>
           <a
-            href={feed?.profileUrl || "https://instagram.com/glowfacecare"}
+            href={feed?.profileUrl || BRAND.instagram.url}
             target="_blank"
             rel="noopener noreferrer"
             className="gf-social-handle-btn"
           >
             <Instagram size={17} />
-            <span>{feed?.handle || "@glowfacecare"}</span>
+            <span>{feed?.handle || BRAND.instagram.handle}</span>
             <ExternalLink size={13} />
           </a>
         </div>

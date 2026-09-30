@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { BRAND } from "../../constants";
 
 
 
@@ -13,9 +14,9 @@ export const Shipping: React.FC = () => (
     </p>
     <h3 style={{ color: "var(--green-dark)", marginTop: "24px", marginBottom: "8px" }}>Dispatch & Timelines</h3>
     <ul style={{ paddingLeft: "20px", lineHeight: "1.8", color: "var(--text-medium)" }}>
-      <li><strong>Dispatch Time:</strong> Orders are dispatched from our Kerala fulfillment center within 24 - 48 business hours.</li>
+      <li><strong>Dispatch Time:</strong> Orders are dispatched within 24 - 48 business hours.</li>
       <li><strong>Delivery Time:</strong> Metro cities typically receive deliveries within 2 - 4 business days. Non-metro locations take 4 - 6 business days.</li>
-      <li><strong>Shipping Charges:</strong> We provide <strong>100% FREE Shipping</strong> on all prepaid orders of ₹499 and above. A flat nominal fee of ₹49 applies for orders below ₹499.</li>
+      <li><strong>Shipping Charges:</strong> We provide <strong>100% FREE Shipping</strong> on all prepaid orders of ₹{BRAND.shipping.freeThreshold} and above. A flat nominal fee of ₹{BRAND.shipping.standardFee} applies for orders below ₹{BRAND.shipping.freeThreshold}.</li>
     </ul>
     <h3 style={{ color: "var(--green-dark)", marginTop: "24px", marginBottom: "8px" }}>Order Tracking</h3>
     <p style={{ lineHeight: "1.8", color: "var(--text-medium)" }}>
@@ -40,7 +41,7 @@ export const Returns: React.FC = () => (
     </ul>
     <h3 style={{ color: "var(--green-dark)", marginTop: "24px", marginBottom: "8px" }}>How to Request a Replacement or Refund</h3>
     <p style={{ lineHeight: "1.8", color: "var(--text-medium)" }}>
-      Please notify our customer care team via WhatsApp (+91 98450 12345) or email at <strong>care@glowface.com</strong> within 7 days of delivery, attaching your Order ID and clear photos/videos of the package. Once verified, we will dispatch an immediate free replacement or process a full refund to your original payment method within 3-5 business days.
+      Please notify our customer care team via WhatsApp ({BRAND.whatsappFormatted}) or email at <strong>{BRAND.email}</strong> within {BRAND.returnPolicyDays} days of delivery, attaching your Order ID and clear photos/videos of the package. Once verified, we will dispatch an immediate free replacement or process a full refund to your original payment method within 3-5 business days.
     </p>
   </div>
 );

@@ -12,8 +12,9 @@ import {
   Phone
 } from "lucide-react";
 import { Instagram } from "../../components/common/InstagramIcon";
-import { adminService } from "../../services/adminService";
-import { useToast } from "../../context/ToastContext";
+import { adminService } from "../../services";
+import { useToast } from "../../contexts/ToastContext";
+import { BRAND } from "../../constants";
 import "./AdminSettings.css";
 
 export const AdminSettings: React.FC = () => {
@@ -22,21 +23,21 @@ export const AdminSettings: React.FC = () => {
   const [saving, setSaving] = useState(false);
 
   // Form states
-  const [storeName, setStoreName] = useState("Glow Face Skincare");
-  const [tagline, setTagline] = useState("Clean, Ayurvedic-infused clinical skincare born in Kerala");
-  const [supportEmail, setSupportEmail] = useState("care@glowface.in");
-  const [supportPhone, setSupportPhone] = useState("+91 94471 23456");
-  const [whatsappNumber, setWhatsappNumber] = useState("+919447123456");
+  const [storeName, setStoreName] = useState<string>(BRAND.name);
+  const [tagline, setTagline] = useState<string>(BRAND.tagline);
+  const [supportEmail, setSupportEmail] = useState<string>(BRAND.email);
+  const [supportPhone, setSupportPhone] = useState<string>(BRAND.phone);
+  const [whatsappNumber, setWhatsappNumber] = useState<string>(BRAND.whatsappFormatted);
 
   // Shipping & Inventory
-  const [freeShippingThreshold, setFreeShippingThreshold] = useState(999);
-  const [standardShippingFee, setStandardShippingFee] = useState(99);
-  const [lowStockThreshold, setLowStockThreshold] = useState(10);
+  const [freeShippingThreshold, setFreeShippingThreshold] = useState<number>(BRAND.shipping.freeThreshold);
+  const [standardShippingFee, setStandardShippingFee] = useState<number>(BRAND.shipping.standardFee);
+  const [lowStockThreshold, setLowStockThreshold] = useState<number>(10);
 
   // Social
-  const [showInstagram, setShowInstagram] = useState(true);
-  const [instagramPostsCount, setInstagramPostsCount] = useState(6);
-  const [instagramHandle, setInstagramHandle] = useState("glowface_official");
+  const [showInstagram, setShowInstagram] = useState<boolean>(true);
+  const [instagramPostsCount, setInstagramPostsCount] = useState<number>(6);
+  const [instagramHandle, setInstagramHandle] = useState<string>(BRAND.instagram.handle);
 
   useEffect(() => {
     adminService.getSettings()
@@ -153,7 +154,7 @@ export const AdminSettings: React.FC = () => {
                 <MessageCircle size={16} />
                 <input
                   type="text"
-                  placeholder="+919447123456"
+                  placeholder="+91 87785 48891"
                   value={whatsappNumber}
                   onChange={e => setWhatsappNumber(e.target.value)}
                 />

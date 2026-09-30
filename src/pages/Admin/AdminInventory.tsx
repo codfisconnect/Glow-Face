@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AlertTriangle, CheckCircle, PackageX, Save, RefreshCw } from "lucide-react";
-import { adminService } from "../../services/adminService";
-import { useToast } from "../../context/ToastContext";
+import { adminService } from "../../services";
+import { useToast } from "../../contexts/ToastContext";
 import "./AdminInventory.css";
 
 export const AdminInventory: React.FC = () => {

@@ -15,7 +15,7 @@
 /* ── SECTION 1: HERO ── */
 .gf-home-hero {
   background: linear-gradient(135deg, #FDF8F3 0%, #F5ECE1 100%);
-  padding: 70px 0 90px;
+  padding: 28px 0 54px;
   position: relative;
   overflow: hidden;
 }
@@ -364,7 +364,7 @@
 
 @media (max-width: 600px) {
   .gf-home-hero {
-    padding: 40px 0 60px;
+    padding: 18px 0 36px;
   }
   .gf-home-section {
     padding: 50px 0;

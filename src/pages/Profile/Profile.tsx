@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { User, Mail, Phone, ShoppingBag, Shield, LogOut, Package, ArrowRight } from "lucide-react";
-import { useAuth } from "../../context/AuthContext";
-import { orderService } from "../../services/orderService";
+import { useAuth } from "../../contexts/AuthContext";
+import { orderService } from "../../services";
 import { Order } from "../../types";
 import "./Profile.css";
 

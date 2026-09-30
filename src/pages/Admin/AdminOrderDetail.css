@@ -187,8 +187,62 @@
   margin-right: 6px;
 }
 
+/* Isolated Form and Grid Styles (Eliminating reliance on Checkout.css/Contact.css) */
+.gf-form-row {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.gf-form-row-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.gf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.gf-field:last-child {
+  margin-bottom: 0;
+}
+
+.gf-field label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #123C2A;
+}
+
+.gf-field input,
+.gf-field select {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #D8E8DC;
+  background: #fff;
+  font-size: 0.88rem;
+  color: #123C2A;
+  outline: none;
+  transition: all 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.gf-field input:focus,
+.gf-field select:focus {
+  border-color: #1F4D3A;
+  box-shadow: 0 0 0 3px rgba(31, 77, 58, 0.1);
+}
+
 @media (max-width: 900px) {
   .gf-ad-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .gf-form-row-2 {
     grid-template-columns: 1fr;
   }
 }

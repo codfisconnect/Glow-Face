@@ -136,6 +136,18 @@
   }
 }
 
+@media (max-width: 600px) {
+  .gf-cat-controls {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .gf-cat-filters {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
 @media (max-width: 480px) {
   .gf-cat-grid {
     grid-template-columns: 1fr;

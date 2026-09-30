@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { User } from "../types";
-import { authService } from "../services/authService";
+import { authService } from "../services";
 
-interface AuthContextType {
+export interface AuthContextType {
   user: User | null;
   token: string | null;
   isAdmin: boolean;
@@ -12,25 +12,29 @@ interface AuthContextType {
   logout: () => void;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(() => {
     const saved = localStorage.getItem("glow_user");
-    try { return saved ? JSON.parse(saved) : null; } catch { return null; }
+    try {
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
   });
   const [token, setToken] = useState<string | null>(() => localStorage.getItem("glow_token"));
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (token) {
-      authService.getProfile()
+      authService
+        .getProfile()
         .then(profile => {
           setUser(profile);
           localStorage.setItem("glow_user", JSON.stringify(profile));
         })
         .catch(() => {
-          // Token expired or invalid
           logout();
         })
         .finally(() => setIsLoading(false));
