@@ -167,6 +167,7 @@ export interface Coupon {
 export interface NotificationLogRecord {
   id: string;
   orderId?: string | null;
+  idempotencyKey?: string | null;
   recipient: string;
   channel: NotificationChannel;
   eventType: string;

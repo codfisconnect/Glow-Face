@@ -1,26 +1,34 @@
 import { ENV } from "../../config/env.js";
-import { logNotification } from "./notificationLogger.js";
+import { logNotification, checkIdempotency } from "./notificationLogger.js";
 
 export interface SendWhatsAppOptions {
   to: string;
   message: string;
   orderId?: string | null;
   eventType?: string;
+  idempotencyKey?: string | null;
 }
 
 export interface SendWhatsAppResult {
   success: boolean;
+  skipped?: boolean;
   messageId?: string;
   error?: string;
   mode?: "LIVE_WHATSAPP" | "DEV_SIMULATION";
 }
 
 export async function sendWhatsAppMessage(options: SendWhatsAppOptions): Promise<SendWhatsAppResult> {
-  const { to, message, orderId = null, eventType = "GENERIC" } = options;
+  const { to, message, orderId = null, eventType = "GENERIC", idempotencyKey = null } = options;
 
   if (!to) {
     console.warn("⚠️ sendWhatsAppMessage called without recipient phone number");
     return { success: false, error: "No recipient phone specified" };
+  }
+
+  // Idempotency check: prevent duplicate notifications
+  if (idempotencyKey && await checkIdempotency(idempotencyKey)) {
+    console.log(`[Notification] Idempotent skip: WhatsApp for ${eventType} (key: ${idempotencyKey}) already processed.`);
+    return { success: true, skipped: true, mode: "DEV_SIMULATION" };
   }
 
   // Normalize phone number (strip spaces, symbols, ensure 91 country code prefix if 10 digits)
@@ -55,6 +63,7 @@ export async function sendWhatsAppMessage(options: SendWhatsAppOptions): Promise
 
       await logNotification({
         orderId,
+        idempotencyKey,
         recipient: formattedPhone,
         channel: "WHATSAPP",
         eventType,
@@ -67,6 +76,7 @@ export async function sendWhatsAppMessage(options: SendWhatsAppOptions): Promise
       console.error(`❌ WhatsApp delivery failed to ${formattedPhone}:`, err.message);
       await logNotification({
         orderId,
+        idempotencyKey,
         recipient: formattedPhone,
         channel: "WHATSAPP",
         eventType,
@@ -83,6 +93,7 @@ export async function sendWhatsAppMessage(options: SendWhatsAppOptions): Promise
     console.error(`❌ [Production] Cannot send WhatsApp to ${formattedPhone}: ${errorMsg}`);
     await logNotification({
       orderId,
+      idempotencyKey,
       recipient: formattedPhone,
       channel: "WHATSAPP",
       eventType,
@@ -104,6 +115,7 @@ export async function sendWhatsAppMessage(options: SendWhatsAppOptions): Promise
 
   await logNotification({
     orderId,
+    idempotencyKey,
     recipient: formattedPhone,
     channel: "WHATSAPP",
     eventType,

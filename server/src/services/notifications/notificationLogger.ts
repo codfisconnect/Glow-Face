@@ -3,6 +3,7 @@ import { NotificationChannel, NotificationStatus, NotificationLogRecord } from "
 
 export interface LogNotificationParams {
   orderId?: string | null;
+  idempotencyKey?: string | null;
   recipient: string;
   channel: NotificationChannel;
   eventType: string;
@@ -12,12 +13,37 @@ export interface LogNotificationParams {
   metadata?: any;
 }
 
+export async function checkIdempotency(idempotencyKey: string): Promise<boolean> {
+  if (!idempotencyKey) return false;
+  const { type, db } = getDatabase();
+
+  try {
+    if (type === "prisma") {
+      const existing = await (db.notificationLog as any).findFirst({
+        where: {
+          idempotencyKey,
+          status: { in: ["SENT", "SIMULATED"] }
+        }
+      });
+      return Boolean(existing);
+    } else {
+      const found = db.notificationLogs.find(
+        l => l.idempotencyKey === idempotencyKey && (l.status === "SENT" || l.status === "SIMULATED")
+      );
+      return Boolean(found);
+    }
+  } catch {
+    return false;
+  }
+}
+
 export async function logNotification(params: LogNotificationParams): Promise<NotificationLogRecord | null> {
   const { type, db } = getDatabase();
 
   const record: NotificationLogRecord = {
     id: `notif_log_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
     orderId: params.orderId || null,
+    idempotencyKey: params.idempotencyKey || null,
     recipient: params.recipient,
     channel: params.channel,
     eventType: params.eventType,
@@ -46,6 +72,7 @@ export async function logNotification(params: LogNotificationParams): Promise<No
       });
       return {
         ...created,
+        idempotencyKey: record.idempotencyKey,
         channel: created.channel as NotificationChannel,
         status: created.status as NotificationStatus
       };

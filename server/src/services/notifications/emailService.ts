@@ -1,6 +1,6 @@
 import nodemailer, { Transporter } from "nodemailer";
 import { ENV } from "../../config/env.js";
-import { logNotification } from "./notificationLogger.js";
+import { logNotification, checkIdempotency } from "./notificationLogger.js";
 
 let transporter: Transporter | null = null;
 
@@ -28,21 +28,29 @@ export interface SendEmailOptions {
   text?: string;
   orderId?: string | null;
   eventType?: string;
+  idempotencyKey?: string | null;
 }
 
 export interface SendEmailResult {
   success: boolean;
+  skipped?: boolean;
   messageId?: string;
   error?: string;
   mode?: "LIVE_SMTP" | "DEV_SIMULATION";
 }
 
 export async function sendEmail(options: SendEmailOptions): Promise<SendEmailResult> {
-  const { to, subject, html, text, orderId = null, eventType = "GENERIC" } = options;
+  const { to, subject, html, text, orderId = null, eventType = "GENERIC", idempotencyKey = null } = options;
 
   if (!to) {
     console.warn("⚠️ sendEmail called without recipient email address");
     return { success: false, error: "No recipient specified" };
+  }
+
+  // Idempotency check: prevent duplicate notifications
+  if (idempotencyKey && await checkIdempotency(idempotencyKey)) {
+    console.log(`[Notification] Idempotent skip: Email for ${eventType} (key: ${idempotencyKey}) already processed.`);
+    return { success: true, skipped: true, mode: "DEV_SIMULATION" };
   }
 
   // 1. Live SMTP Dispatch
@@ -58,6 +66,7 @@ export async function sendEmail(options: SendEmailOptions): Promise<SendEmailRes
 
       await logNotification({
         orderId,
+        idempotencyKey,
         recipient: to,
         channel: "EMAIL",
         eventType,
@@ -70,6 +79,7 @@ export async function sendEmail(options: SendEmailOptions): Promise<SendEmailRes
       console.error(`❌ SMTP delivery failed to ${to}:`, err.message);
       await logNotification({
         orderId,
+        idempotencyKey,
         recipient: to,
         channel: "EMAIL",
         eventType,
@@ -86,6 +96,7 @@ export async function sendEmail(options: SendEmailOptions): Promise<SendEmailRes
     console.error(`❌ [Production] Cannot send email to ${to}: ${errorMsg}`);
     await logNotification({
       orderId,
+      idempotencyKey,
       recipient: to,
       channel: "EMAIL",
       eventType,
@@ -107,6 +118,7 @@ export async function sendEmail(options: SendEmailOptions): Promise<SendEmailRes
 
   await logNotification({
     orderId,
+    idempotencyKey,
     recipient: to,
     channel: "EMAIL",
     eventType,
