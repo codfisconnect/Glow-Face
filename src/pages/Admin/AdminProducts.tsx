@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Plus, Edit2, Trash2, Check, X, Search, Image as ImageIcon } from "lucide-react";
-import { productService } from "../../services";
+import { Plus, Edit2, Trash2, Check, X, Search, Image as ImageIcon, Upload } from "lucide-react";
+import { productService, mediaService } from "../../services";
 import { Product, Category } from "../../types";
 import { useToast } from "../../contexts/ToastContext";
 import { Modal } from "../../components/common/Modal/Modal";
@@ -38,6 +38,22 @@ export const AdminProducts: React.FC = () => {
     active: true,
     image: "/assets/cream-hero.jpg"
   });
+  const [uploadingImage, setUploadingImage] = useState(false);
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadingImage(true);
+    try {
+      const res = await mediaService.uploadImage(file, "products");
+      setFormData(prev => ({ ...prev, image: res.secureUrl || res.url }));
+      showToast("Product image uploaded successfully!");
+    } catch (err: any) {
+      showToast(err.message || "Failed to upload image", "error");
+    } finally {
+      setUploadingImage(false);
+    }
+  };
 
   const loadData = () => {
     setLoading(true);
@@ -319,12 +335,33 @@ export const AdminProducts: React.FC = () => {
               </div>
 
               <div className="gf-field">
-                <label>Primary Image URL or Asset Path</label>
-                <input
-                  type="text"
-                  value={formData.image}
-                  onChange={e => setFormData({ ...formData, image: e.target.value })}
-                />
+                <label>Product Formulation Imagery</label>
+                <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+                  <input
+                    type="text"
+                    value={formData.image}
+                    onChange={e => setFormData({ ...formData, image: e.target.value })}
+                    placeholder="Image URL or upload below..."
+                    style={{ flex: 1 }}
+                  />
+                  <label className="gf-ad-primary-btn" style={{ cursor: "pointer", padding: "10px 14px", fontSize: "0.82rem", display: "inline-flex", alignItems: "center", gap: "6px" }}>
+                    <Upload size={14} />
+                    <span>{uploadingImage ? "Uploading..." : "Upload File"}</span>
+                    <input
+                      type="file"
+                      accept="image/png,image/jpeg,image/webp,image/avif"
+                      onChange={handleFileUpload}
+                      style={{ display: "none" }}
+                      disabled={uploadingImage}
+                    />
+                  </label>
+                </div>
+                {formData.image && (
+                  <div style={{ marginTop: "8px", display: "flex", alignItems: "center", gap: "10px" }}>
+                    <img src={formData.image} alt="Preview" style={{ width: "48px", height: "48px", borderRadius: "6px", objectFit: "cover", border: "1px solid #D8E8DC" }} />
+                    <small style={{ color: "#6B8C78" }}>Image preview</small>
+                  </div>
+                )}
               </div>
 
               <div className="gf-field">

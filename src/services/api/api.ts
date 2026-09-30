@@ -1,5 +1,9 @@
 const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
+export function getAuthToken(): string | null {
+  return localStorage.getItem("glow_token");
+}
+
 export async function apiRequest<T>(
   endpoint: string,
   options: RequestInit = {}

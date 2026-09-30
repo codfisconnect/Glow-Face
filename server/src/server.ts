@@ -12,6 +12,7 @@ import webhookRoutes from "./routes/webhookRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import socialRoutes from "./routes/socialRoutes.js";
+import mediaRoutes from "./routes/mediaRoutes.js";
 
 // Controllers for backward compatibility
 import { paymentController } from "./controllers/paymentController.js";
@@ -90,6 +91,8 @@ app.use("/api/webhook", webhookRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/social", socialRoutes);
+app.use("/api/media", mediaRoutes);
+app.use("/api/admin/media", mediaRoutes);
 
 // Backward-compatible direct endpoints
 app.post("/api/create-order", orderController.createOrder);
