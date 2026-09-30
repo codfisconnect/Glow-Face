@@ -119,6 +119,8 @@ export const AdminOrderDetail: React.FC = () => {
                     <option value="OUT_FOR_DELIVERY">OUT FOR DELIVERY</option>
                     <option value="DELIVERED">DELIVERED</option>
                     <option value="CANCELLED">CANCELLED</option>
+                    <option value="REFUND_INITIATED">REFUND INITIATED</option>
+                    <option value="REFUNDED">REFUNDED</option>
                     <option value="PAYMENT_FAILED">PAYMENT FAILED</option>
                   </select>
                 </div>
@@ -233,6 +235,20 @@ export const AdminOrderDetail: React.FC = () => {
               <p><strong>Payment ID:</strong> {order.razorpayPaymentId || "N/A"}</p>
               <p><strong>Payment Status:</strong> {order.paymentStatus}</p>
               <p><strong>Paid At:</strong> {order.paidAt ? new Date(order.paidAt).toLocaleString() : "Pending"}</p>
+            </div>
+          </div>
+
+          {/* Lifecycle Timestamps */}
+          <div className="gf-ad-card">
+            <h3 className="gf-ad-card-title">Fulfillment Milestones</h3>
+            <div className="gf-ad-cust-info-lines">
+              <p><strong>Placed:</strong> {new Date(order.createdAt).toLocaleString()}</p>
+              {order.paidAt && <p><strong>Paid:</strong> {new Date(order.paidAt).toLocaleString()}</p>}
+              {order.packedAt && <p><strong>Packed:</strong> {new Date(order.packedAt).toLocaleString()}</p>}
+              {order.shippedAt && <p><strong>Shipped:</strong> {new Date(order.shippedAt).toLocaleString()}</p>}
+              {order.deliveredAt && <p><strong>Delivered:</strong> {new Date(order.deliveredAt).toLocaleString()}</p>}
+              {order.cancelledAt && <p style={{ color: "#b91c1c" }}><strong>Cancelled:</strong> {new Date(order.cancelledAt).toLocaleString()}</p>}
+              {order.refundedAt && <p style={{ color: "#d97706" }}><strong>Refunded:</strong> {new Date(order.refundedAt).toLocaleString()}</p>}
             </div>
           </div>
         </div>

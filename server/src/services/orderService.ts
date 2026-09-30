@@ -40,9 +40,11 @@ export class OrderService {
       carrier: raw.carrier ?? null,
       notes: raw.notes ?? null,
       paidAt: raw.paidAt ? new Date(raw.paidAt) : null,
+      packedAt: raw.packedAt ? new Date(raw.packedAt) : null,
       shippedAt: raw.shippedAt ? new Date(raw.shippedAt) : null,
       deliveredAt: raw.deliveredAt ? new Date(raw.deliveredAt) : null,
       cancelledAt: raw.cancelledAt ? new Date(raw.cancelledAt) : null,
+      refundedAt: raw.refundedAt ? new Date(raw.refundedAt) : null,
       createdAt: new Date(raw.createdAt),
       updatedAt: new Date(raw.updatedAt),
       items: Array.isArray(raw.items)
@@ -524,9 +526,11 @@ export class OrderService {
       updatedAt: now
     };
 
+    if (nextStatus === "PACKED" && !order.packedAt) updates.packedAt = now;
     if (nextStatus === "SHIPPED" && !order.shippedAt) updates.shippedAt = now;
     if (nextStatus === "DELIVERED" && !order.deliveredAt) updates.deliveredAt = now;
     if (nextStatus === "CANCELLED" && !order.cancelledAt) updates.cancelledAt = now;
+    if (nextStatus === "REFUNDED" && !order.refundedAt) updates.refundedAt = now;
 
     if (type === "prisma") {
       order = await db.order.update({
@@ -577,7 +581,11 @@ export class OrderService {
 
     // Trigger corresponding status change notifications (Non-blocking)
     if (nextStatus !== previousStatus) {
-      if (nextStatus === "SHIPPED") {
+      if (nextStatus === "PROCESSING") {
+        notificationService.notifyOrderProcessing(formatted);
+      } else if (nextStatus === "PACKED") {
+        notificationService.notifyOrderPacked(formatted);
+      } else if (nextStatus === "SHIPPED") {
         notificationService.notifyOrderShipped(formatted);
       } else if (nextStatus === "OUT_FOR_DELIVERY") {
         notificationService.notifyOutForDelivery(formatted);
