@@ -103,7 +103,7 @@ app.post("/api/validate-coupon", paymentController.validateCoupon);
 app.use(errorHandler);
 
 // Start Server
-if (process.env.NODE_ENV !== "test") {
+if (process.env.NODE_ENV !== "test" && !process.env.VERCEL) {
   app.listen(ENV.PORT, () => {
     console.log(`
 ┌───────────────────────────────────────────────────────────┐
