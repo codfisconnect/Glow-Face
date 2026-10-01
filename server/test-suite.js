@@ -89,7 +89,7 @@ async function runTests() {
     const res = await fetch(`${BASE_URL}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: "admin@glowface.com", password: "GlowAdmin2026!" })
+      body: JSON.stringify({ email: "admin@glowface.in", password: "GlowAdmin2026!" })
     });
     const data = await res.json();
     if (res.ok && data.ok && data.user?.role === "ADMIN") {
