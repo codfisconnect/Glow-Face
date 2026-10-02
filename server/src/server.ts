@@ -83,6 +83,39 @@ app.get("/api/health", (req: Request, res: Response) => {
   });
 });
 
+app.get("/api/debug/prisma", async (req, res) => {
+  try {
+    const db = getDatabase();
+
+    if (db.type !== "prisma") {
+      return res.json({
+        databaseType: db.type,
+        prisma: false,
+      });
+    }
+
+    const product = await db.db.product.findFirst({
+      select: {
+        id: true,
+        categorySlug: true,
+      },
+    });
+
+    return res.json({
+      databaseType: "prisma",
+      prisma: true,
+      prismaVersion: "6.19.3",
+      categorySlugSupported: true,
+      sample: product,
+    });
+  } catch (error: any) {
+    return res.status(500).json({
+      error: error.message,
+      prismaVersion: "6.19.3",
+    });
+  }
+});
+
 // Mount Routes
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
