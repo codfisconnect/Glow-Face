@@ -7,7 +7,7 @@
     "dev": "concurrently -n \"server,vite\" -c \"green,cyan\" \"npm run server:dev\" \"vite\"",
     "dev:vite": "vite",
     "server:dev": "npm --prefix server run dev",
-    "server:install": "npm --prefix server ci",
+    "server:install": "npm --prefix server ci --include=dev",
     "server:build": "npm --prefix server run build",
     "server:start": "npm --prefix server start",
     "create-admin": "npm --prefix server run create-admin",
