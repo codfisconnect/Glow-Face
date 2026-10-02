@@ -286,7 +286,7 @@ export class ProductService {
           db.category.update({
             where: { id },
             data: { sortOrder: index + 1 }
-          }).catch(() => {})
+          }).catch(() => { })
         )
       );
       return { success: true };
@@ -381,42 +381,154 @@ export class ProductService {
     const { type, db } = getDatabase();
 
     if (type === "prisma") {
-      const existing = await db.product.findUnique({ where: { id }, include: { images: true } });
-      const oldImage = existing?.images?.[0]?.url;
+      const existing = await db.product.findUnique({
+        where: { id },
+        include: { images: true }
+      });
 
-      const dataToUpdate: any = { ...updates };
-      if (dataToUpdate.benefits !== undefined && typeof dataToUpdate.benefits !== "string") {
-        dataToUpdate.benefits = JSON.stringify(dataToUpdate.benefits);
+      if (!existing) {
+        throw new HttpError(404, "Product not found");
       }
-      if (dataToUpdate.keyIngredients !== undefined && typeof dataToUpdate.keyIngredients !== "string") {
-        dataToUpdate.keyIngredients = JSON.stringify(dataToUpdate.keyIngredients);
+
+      const oldImage = existing.images?.[0]?.url;
+
+      const dataToUpdate: any = {};
+
+      if (updates.name !== undefined) dataToUpdate.name = updates.name;
+      if (updates.slug !== undefined) dataToUpdate.slug = updates.slug;
+      if (updates.shortName !== undefined) dataToUpdate.shortName = updates.shortName;
+      if (updates.sku !== undefined) dataToUpdate.sku = updates.sku;
+
+      if (updates.price !== undefined) {
+        dataToUpdate.price = Number(updates.price);
       }
+
+      if (updates.originalPrice !== undefined) {
+        dataToUpdate.originalPrice = Number(updates.originalPrice);
+      }
+
+      if (updates.discount !== undefined) {
+        dataToUpdate.discount = Number(updates.discount);
+      }
+
+      if (updates.stock !== undefined) {
+        dataToUpdate.stock = Number(updates.stock);
+      }
+
+      if (updates.lowStockThreshold !== undefined) {
+        dataToUpdate.lowStockThreshold = Number(updates.lowStockThreshold);
+      }
+
+      if (updates.categorySlug !== undefined) {
+        dataToUpdate.categorySlug = updates.categorySlug;
+      }
+
+      if (updates.description !== undefined) {
+        dataToUpdate.description = updates.description;
+      }
+
+      if (updates.shortDescription !== undefined) {
+        dataToUpdate.shortDescription = updates.shortDescription;
+      }
+
+      if (updates.ingredients !== undefined) {
+        dataToUpdate.ingredients = updates.ingredients;
+      }
+
+      if (updates.howToUse !== undefined) {
+        dataToUpdate.howToUse = updates.howToUse;
+      }
+
+      if (updates.whoItsFor !== undefined) {
+        dataToUpdate.whoItsFor = updates.whoItsFor;
+      }
+
+      if (updates.skinConcerns !== undefined) {
+        dataToUpdate.skinConcerns = updates.skinConcerns;
+      }
+
+      if (updates.rating !== undefined) {
+        dataToUpdate.rating = Number(updates.rating);
+      }
+
+      if (updates.reviewsCount !== undefined) {
+        dataToUpdate.reviewsCount = Number(updates.reviewsCount);
+      }
+
+      if (updates.featured !== undefined) {
+        dataToUpdate.featured = Boolean(updates.featured);
+      }
+
+      if (updates.bestSeller !== undefined) {
+        dataToUpdate.bestSeller = Boolean(updates.bestSeller);
+      }
+
+      if (updates.active !== undefined) {
+        dataToUpdate.active = Boolean(updates.active);
+      }
+
+      if (updates.sortOrder !== undefined) {
+        dataToUpdate.sortOrder = Number(updates.sortOrder);
+      }
+
+      if (updates.benefits !== undefined) {
+        dataToUpdate.benefits =
+          typeof updates.benefits === "string"
+            ? updates.benefits
+            : JSON.stringify(updates.benefits);
+      }
+
+      if (updates.keyIngredients !== undefined) {
+        dataToUpdate.keyIngredients =
+          typeof updates.keyIngredients === "string"
+            ? updates.keyIngredients
+            : JSON.stringify(updates.keyIngredients);
+      }
+
       const updated = await db.product.update({
         where: { id },
         data: dataToUpdate,
-        include: { images: true, category: true }
+        include: {
+          images: true,
+          category: true
+        }
       });
 
-      if (updates.image && oldImage && updates.image !== oldImage && !oldImage.startsWith("/assets/")) {
-        cloudinaryService.deleteProductImage(oldImage).catch(() => {});
+      if (
+        updates.image &&
+        oldImage &&
+        updates.image !== oldImage &&
+        !oldImage.startsWith("/assets/")
+      ) {
+        cloudinaryService.deleteProductImage(oldImage).catch(() => { });
       }
 
       return this.formatProduct(updated);
     }
 
     const p = db.products.get(id);
-    if (!p) throw new HttpError(404, "Product not found");
+
+    if (!p) {
+      throw new HttpError(404, "Product not found");
+    }
 
     const oldImage = p.image;
+
     const updatedProduct = {
       ...p,
       ...updates,
       updatedAt: new Date()
     };
+
     db.products.set(id, updatedProduct);
 
-    if (updates.image && oldImage && updates.image !== oldImage && !oldImage.startsWith("/assets/")) {
-      cloudinaryService.deleteProductImage(oldImage).catch(() => {});
+    if (
+      updates.image &&
+      oldImage &&
+      updates.image !== oldImage &&
+      !oldImage.startsWith("/assets/")
+    ) {
+      cloudinaryService.deleteProductImage(oldImage).catch(() => { });
     }
 
     return updatedProduct;
