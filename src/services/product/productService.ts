@@ -98,7 +98,7 @@ export const productService = {
 
   async updateProduct(id: string, data: Partial<Product>): Promise<Product> {
     const res = await apiRequest<{ ok: boolean; product: Product }>(`/products/${id}`, {
-      method: "PUT",
+      method: "PATCH",
       body: JSON.stringify(data)
     });
     return res.product;
