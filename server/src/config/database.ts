@@ -13,25 +13,22 @@ if (ENV.DATABASE_URL && ENV.DATABASE_URL.startsWith("postgres")) {
           url: ENV.DATABASE_URL,
         },
       },
-      log: ENV.NODE_ENV === "development" ? ["warn", "error"] : ["error"],
-    });
-
-    // Prisma connects lazily on the first database query.
-    // Do not depend on an asynchronous module-level $connect()
-    // for Vercel serverless functions.
-    prisma.$connect().catch((err: Error) => {
-      console.error("❌ PostgreSQL connection failed:", err.message);
+      log: ENV.NODE_ENV === "development"
+        ? ["warn", "error"]
+        : ["error"],
     });
   } catch (err: any) {
-    console.error("❌ Error initializing PrismaClient:", err.message);
+    console.error("Error initializing PrismaClient:", err.message);
   }
 } else {
   if (ENV.NODE_ENV === "production") {
     console.error(
-      "🚨 CRITICAL: DATABASE_URL not set in PRODUCTION environment!"
+      "CRITICAL: DATABASE_URL not set in PRODUCTION environment!"
     );
   } else {
-    console.log("ℹ️ Development mode: Running with in-memory DevStore.");
+    console.log(
+      "Development mode: Running with in-memory DevStore."
+    );
   }
 }
 
@@ -40,25 +37,31 @@ export type DatabaseProvider =
   | { type: "devStore"; db: typeof devStore };
 
 export function getDatabase(): DatabaseProvider {
-  // In production, if Prisma was initialized with a PostgreSQL URL,
-  // return it immediately. Prisma itself handles the database
-  // connection when the first query executes.
   if (ENV.NODE_ENV === "production") {
-    if (prisma) {
-      return { type: "prisma", db: prisma };
+    if (!prisma) {
+      throw new HttpError(
+        503,
+        "Database service unavailable. PostgreSQL configuration is missing."
+      );
     }
 
-    throw new HttpError(
-      503,
-      "Database service unavailable. PostgreSQL configuration is missing."
-    );
+    return {
+      type: "prisma",
+      db: prisma,
+    };
   }
 
   if (prisma) {
-    return { type: "prisma", db: prisma };
+    return {
+      type: "prisma",
+      db: prisma,
+    };
   }
 
-  return { type: "devStore", db: devStore };
+  return {
+    type: "devStore",
+    db: devStore,
+  };
 }
 
 export { prisma, devStore };
