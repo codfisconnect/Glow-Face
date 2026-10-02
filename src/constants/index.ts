@@ -15,9 +15,11 @@ export const BRAND = {
     handle: "@glowface.kl",
     url: "https://www.instagram.com/glowface.kl/"
   },
+
   shipping: {
     freeThreshold: 499,
-    standardFee: 49,
+    //salman
+    standardFee: 1,
     policyText: "Free shipping on all prepaid orders across India",
     dispatchWindow: "24 - 48 business hours",
     deliveryWindow: "3 - 5 business days"

@@ -58,9 +58,8 @@ export class PaymentService {
         subtotal: itemTotal
       });
     }
-    //salman
     // Shipping threshold (Free on orders >= ₹499)
-    const shipping = subtotal >= 499 ? 0 : 1;
+    const shipping = subtotal >= 499 ? 0 : 49;
 
     // Coupon discount calculation using dynamic couponService
     let discount = 0;
