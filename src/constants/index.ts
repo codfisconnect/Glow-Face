@@ -18,8 +18,8 @@ export const BRAND = {
 
   shipping: {
     freeThreshold: 499,
-    //salman
-    standardFee: 1,
+
+    standardFee: 49,
     policyText: "Free shipping on all prepaid orders across India",
     dispatchWindow: "24 - 48 business hours",
     deliveryWindow: "3 - 5 business days"
