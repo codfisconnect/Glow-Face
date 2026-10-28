@@ -5,7 +5,6 @@ import { useAuth } from "../contexts/AuthContext";
 // Layout components
 import { Header } from "../components/layout/Header";
 import { Footer } from "../components/layout/Footer";
-import { AnnouncementBar } from "../components/layout/AnnouncementBar";
 import { CartDrawer } from "../components/cart/CartDrawer";
 import { AdminLayout } from "../components/layout/AdminLayout";
 
@@ -53,7 +52,6 @@ const ScrollToTop: React.FC = () => {
 const CustomerLayout: React.FC = () => {
   return (
     <div className="gf-storefront-shell">
-      <AnnouncementBar />
       <Header />
       <main className="gf-storefront-content">
         <Outlet />
